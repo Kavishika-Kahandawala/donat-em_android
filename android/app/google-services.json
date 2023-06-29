@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "193701428947",
+    "project_id": "donat-em-a9d65",
+    "storage_bucket": "donat-em-a9d65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193701428947:android:81ff3e573ce420a2949e26",
+        "android_client_info": {
+          "package_name": "com.thedonatem.donatem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193701428947-5oq80qbmdvn3b38m5le8edt2nojh5bfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3PW_EBQXELptqsMxR0YCgLC1eZQbYFMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193701428947-5oq80qbmdvn3b38m5le8edt2nojh5bfq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "193701428947-auj6koqqt10c4od48ccikaqu4cde0g2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.donatem.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
