@@ -1,3 +1,4 @@
+import 'package:donatem/screens/authenticate/authentication.dart';
 import 'package:donatem/screens/main/home_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,6 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //return either Home or Authentication widget
-    return HomeUI();
+    return Authentication();
   }
 }
