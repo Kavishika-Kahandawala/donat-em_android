@@ -69,17 +69,14 @@ class LoginUI extends StatelessWidget {
                   const SizedBox(height: 10),
         
                   // Forgot password
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'forgot password ?',
-                          style: TextStyle(color: Colors.grey[600]),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'forgot password ?',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 50),
         

@@ -11,7 +11,7 @@ class InputButton1 extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(15.0),  //change button size
-        margin: const EdgeInsets.symmetric(horizontal: 25.0), //aligning horizontally with same gap
+        // margin: const EdgeInsets.symmetric(horizontal: 25.0), //aligning horizontally with same gap
         decoration: BoxDecoration(
           color: Colors.deepPurple, //button color
           borderRadius: BorderRadius.circular(8), //circular touch
