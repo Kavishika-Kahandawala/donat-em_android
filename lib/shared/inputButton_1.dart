@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class InputButton1 extends StatelessWidget {
   final Function()? onTap;
-  const InputButton1({super.key, required this.onTap});
+  final String text;
+  const InputButton1({super.key, required this.onTap, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class InputButton1 extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'Sign in',
+            text,
             style: GoogleFonts.poppins(
               color: Colors.white,
               fontSize: 15,

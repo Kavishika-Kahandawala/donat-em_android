@@ -1,8 +1,7 @@
-import 'package:donatem/screens/authenticate/main_page.dart';
-import 'package:donatem/screens/wrapper.dart';
+import 'package:donatem/screens/on_board_screen/on_board.dart';
 import 'package:flutter/material.dart';
-import 'package:donatem/screens/authenticate/login.dart';
 
+// Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -19,9 +18,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginUI(),
+      // home: AuthService(),
+      home: OnBoardingScreen(),
     );
   }
 }
