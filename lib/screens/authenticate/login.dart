@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../services/auth.dart';
 import 'forgotpass.dart';
 
 class LoginUI extends StatefulWidget {
@@ -46,6 +47,13 @@ class _LoginUIState extends State<LoginUI> {
 
       //pop loading circle
       Navigator.pop(context);
+      {
+        await Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const AuthService();
+          },
+        ));
+      }
     } on FirebaseAuthException catch (e) {
       //pop loading circle
       Navigator.pop(context);
@@ -96,7 +104,7 @@ class _LoginUIState extends State<LoginUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: Center(
         child: Padding(
@@ -179,7 +187,8 @@ class _LoginUIState extends State<LoginUI> {
                         Text(
                           'Not a member?',
                           style: GoogleFonts.poppins(
-                            color: Colors.white,
+                            // color: Colors.white,       //TODO: clear this
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 4),

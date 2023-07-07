@@ -1,4 +1,4 @@
-import 'package:donatem/screens/on_board_screen/on_board.dart';
+import 'package:donatem/services/auth.dart';
 import 'package:flutter/material.dart';
 
 // Firebase
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: AuthService(),
-      home: OnBoardingScreen(),
+      home: AuthService(),
     );
   }
 }

@@ -1,3 +1,7 @@
+import 'package:donatem/screens/main/history.dart';
+import 'package:donatem/screens/main/loyalty.dart';
+import 'package:donatem/screens/main/main_page.dart';
+import 'package:donatem/screens/main/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -10,6 +14,7 @@ class HomeUI extends StatefulWidget {
 }
 
 class _HomeUIState extends State<HomeUI> {
+  int _selectedIndex = 0;
   final user = FirebaseAuth.instance.currentUser!;
   //
   //sign User Out
@@ -17,16 +22,18 @@ class _HomeUIState extends State<HomeUI> {
     FirebaseAuth.instance.signOut();
   }
 
+  static const List<Widget> _widgetOptions = <Widget>[
+    MainPageUI(),
+    LoyaltyUI(),
+    HistoryUI(),
+    UserProfileUI()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(onPressed: signOutUser, icon: Icon(Icons.logout))
-          ],
-        ),
         body: Center(
-          child: Text('Logged in as : ' + user.email!),
+          child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: Container(
           color: Colors.deepPurple.shade400,
@@ -39,9 +46,6 @@ class _HomeUIState extends State<HomeUI> {
                 tabBackgroundColor: Colors.deepPurple.shade200,
                 gap: 8,
                 padding: const EdgeInsets.all(16),
-                onTabChange: (index) {
-                  print(index);
-                },
                 tabs: const [
                   GButton(
                     icon: Icons.home,
@@ -59,7 +63,14 @@ class _HomeUIState extends State<HomeUI> {
                     icon: Icons.account_circle,
                     text: 'Account',
                   ),
-                ]),
+                ],
+                selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+                ),
           ),
         ));
   }

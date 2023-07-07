@@ -1,5 +1,5 @@
 import 'package:donatem/screens/authenticate/login.dart';
-import 'package:donatem/screens/main/home_ui.dart';
+import 'package:donatem/screens/main/main_ui.dart';
 import 'package:donatem/services/reg_or_log.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,10 +1,9 @@
 import 'package:donatem/screens/on_board_screen/intro_1.dart';
 import 'package:donatem/screens/on_board_screen/intro_2.dart';
 import 'package:donatem/screens/on_board_screen/intro_3.dart';
+import 'package:donatem/services/reg_or_log.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../services/auth.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -32,7 +31,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 onLastPage = (index == 2);
               });
             },
-            children: [
+            children: const [
               Intro1(),
               Intro2(),
               Intro3(),
@@ -41,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
           //dot indicator
           Container(
-              alignment: Alignment(0, 0.78),
+              alignment: const Alignment(0, 0.78),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -52,13 +51,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             _controller.jumpToPage(2);
                           },
                           // TODO: Check with different resolutions
-                          child: SizedBox(width: 30),
+                          child: const SizedBox(width: 30),
                         )
                       : GestureDetector(
                           onTap: () {
                             _controller.jumpToPage(2);
                           },
-                          child: Text('skip'),
+                          child: const Text('skip'),
                         ),
 
                   //dot indicator
@@ -68,19 +67,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   onLastPage
                       ? GestureDetector(
                           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return AuthService();
+                            return const RegisterOrLogin();
                           },));
                           },
-                          child: Text('Done'),
+                          child: const Text('Done'),
                         )
                       : GestureDetector(
                           onTap: () {
                             _controller.nextPage(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.easeIn,
                             );
                           },
-                          child: Text('Next'),
+                          child: const Text('Next'),
                         ),
                 ],
               ))

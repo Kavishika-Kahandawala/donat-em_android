@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../services/auth.dart';
+
 class RegisterUI extends StatefulWidget {
   final Function()? onTap;
   const RegisterUI({super.key, required this.onTap});
@@ -44,12 +46,20 @@ class _RegisterUIState extends State<RegisterUI> {
           email: emailController.text.trim(),
           password: passController.text.trim());
 
-          String id = FirebaseAuth.instance.currentUser!.uid.toString();
-          
-          addUserDetails(id, 'fname', 'lname', emailController.text.trim(), '25');
+      String id = FirebaseAuth.instance.currentUser!.uid.toString();
+
+      addUserDetails(id, 'fname', 'lname', emailController.text.trim(), '25');
 
       //pop loading circle
       Navigator.pop(context);
+
+      {
+       await Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const AuthService();
+          },
+        ));
+      }
     } on FirebaseAuthException catch (e) {
       //pop loading circle
       Navigator.pop(context);
@@ -110,7 +120,7 @@ class _RegisterUIState extends State<RegisterUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.deepPurple[200],
       body: SafeArea(
           child: Center(
         child: Padding(

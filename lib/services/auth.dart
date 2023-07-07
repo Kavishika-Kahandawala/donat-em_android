@@ -1,6 +1,5 @@
-import 'package:donatem/screens/authenticate/login.dart';
-import 'package:donatem/screens/main/home_ui.dart';
-import 'package:donatem/services/reg_or_log.dart';
+import 'package:donatem/screens/main/main_ui.dart';
+import 'package:donatem/screens/on_board_screen/on_board.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,7 @@ class AuthService extends StatelessWidget {
 
           //user hasn't logged in
           else{
-            return const RegisterOrLogin();
+            return const OnBoardingScreen();
           }
         },
       ),

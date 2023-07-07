@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoyaltyUI extends StatefulWidget {
-  const LoyaltyUI({super.key});
+class MainPageUI extends StatefulWidget {
+  const MainPageUI({super.key});
 
   @override
-  State<LoyaltyUI> createState() => _LoyaltyUIState();
+  State<MainPageUI> createState() => _MainPageUIState();
 }
 
-class _LoyaltyUIState extends State<LoyaltyUI> {
+class _MainPageUIState extends State<MainPageUI> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -19,7 +19,7 @@ class _LoyaltyUIState extends State<LoyaltyUI> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Loyalty page')
+                  Text('Main page'),
                   //TODO: for accounts page
                   // Text('Logged in as : ' + user.email!),
                   // IconButton(onPressed: signOutUser, icon: Icon(Icons.logout)),
