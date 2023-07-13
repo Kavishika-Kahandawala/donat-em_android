@@ -8,6 +8,8 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //return either Home or Authentication widget
-    return Authentication();
+    return const Authentication();
   }
 }
+
+//deprecated

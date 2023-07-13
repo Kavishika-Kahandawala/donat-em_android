@@ -14,12 +14,12 @@ class _LoyaltyUIState extends State<LoyaltyUI> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Loyalty page')
+                  Text('Loaylty page')
                   //TODO: for accounts page
                   // Text('Logged in as : ' + user.email!),
                   // IconButton(onPressed: signOutUser, icon: Icon(Icons.logout)),

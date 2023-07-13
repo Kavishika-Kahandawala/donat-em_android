@@ -1,7 +1,5 @@
-import 'package:donatem/screens/authenticate/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../services/auth.dart';
 import '../../shared/inputButton_1.dart';
@@ -68,7 +66,7 @@ class _ForgotPassUIState extends State<ForgotPassUI> {
                     } else {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return AuthService();
+                        return const AuthService();
                       }));
                     }
                   }
@@ -93,7 +91,7 @@ class _ForgotPassUIState extends State<ForgotPassUI> {
             child: Column(
               children: [
                 const SizedBox(height: 30),
-                Text(
+                const Text(
                   'Enter Your Email here. An email with a password reset link will be sent if e-mail is available on our servers.',
                   // style:
                   // GoogleFonts.poppins(

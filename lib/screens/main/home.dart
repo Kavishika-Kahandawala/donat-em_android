@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HistoryUI extends StatefulWidget {
-  const HistoryUI({super.key});
+class MainPageUI extends StatefulWidget {
+  const MainPageUI({super.key});
 
   @override
-  State<HistoryUI> createState() => _HistoryUIState();
+  State<MainPageUI> createState() => _MainPageUIState();
 }
 
-class _HistoryUIState extends State<HistoryUI> {
+class _MainPageUIState extends State<MainPageUI> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -17,7 +17,7 @@ class _HistoryUIState extends State<HistoryUI> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('History page')
+                Text('Main page'),
                 //TODO: for accounts page
                 // Text('Logged in as : ' + user.email!),
                 // IconButton(onPressed: signOutUser, icon: Icon(Icons.logout)),

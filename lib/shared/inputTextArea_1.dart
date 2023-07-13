@@ -20,7 +20,7 @@ class InputTextArea1 extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white)),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.deepPurple),
         ),
         fillColor: Colors.grey.shade200,

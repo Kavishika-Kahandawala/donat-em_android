@@ -48,7 +48,7 @@ class _RegisterUIState extends State<RegisterUI> {
 
       String id = FirebaseAuth.instance.currentUser!.uid.toString();
 
-      addUserDetails(id, 'fname', 'lname', emailController.text.trim(), '25');
+      addUserDetails(id, emailController.text.trim());
 
       //pop loading circle
       Navigator.pop(context);
@@ -107,13 +107,13 @@ class _RegisterUIState extends State<RegisterUI> {
   }
 
   Future addUserDetails(
-      String uid, String fname, String lname, String email, String age) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'uid': uid,
-      'firstname': fname,
-      'lastname': lname,
-      'email': email,
-      'age': age
+      String uid, String email) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).set({
+      'first_name': '',
+      'last_name': '',
+      'email': '',
+      'age': '',
+      'reg_step':0,
     });
   }
 

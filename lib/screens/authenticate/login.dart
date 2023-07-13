@@ -9,7 +9,7 @@ import 'forgotpass.dart';
 
 class LoginUI extends StatefulWidget {
   final Function ()? onTap;
-  LoginUI({super.key, required this.onTap});
+  const LoginUI({super.key, required this.onTap});
 
   @override
   State<LoginUI> createState() => _LoginUIState();
@@ -164,7 +164,7 @@ class _LoginUIState extends State<LoginUI> {
                       children: [
                         GestureDetector(onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return ForgotPassUI();
+                            return const ForgotPassUI();
                           }));
                         },
                           child: Text(

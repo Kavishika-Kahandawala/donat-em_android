@@ -21,18 +21,15 @@ class _UserProfileUIState extends State<UserProfileUI> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('User account page'),
-                  //TODO: for accounts page
-                  Text('Logged in as : ' + user.email!),
-                  IconButton(onPressed: signOutUser, icon: Icon(Icons.logout)),
-                ],
-              ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('User account page'),
+                //TODO: for accounts page
+                Text('Logged in as : ${user.uid}'),
+                IconButton(onPressed: signOutUser, icon: const Icon(Icons.logout)),
+              ],
             ),
           ),
         ),

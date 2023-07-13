@@ -1,4 +1,4 @@
-import 'package:donatem/screens/main/main_ui.dart';
+import 'package:donatem/screens/main/navigation_bar.dart';
 import 'package:donatem/screens/on_board_screen/on_board.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

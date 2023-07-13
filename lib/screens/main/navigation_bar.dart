@@ -1,10 +1,12 @@
 import 'package:donatem/screens/main/history.dart';
-import 'package:donatem/screens/main/loyalty.dart';
-import 'package:donatem/screens/main/main_page.dart';
+import 'package:donatem/screens/main/home.dart';
 import 'package:donatem/screens/main/user_profile.dart';
+import 'package:donatem/screens/main/userdata.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+import '../authenticate/reg_steppers/stepper_home.dart';
 
 class HomeUI extends StatefulWidget {
   const HomeUI({super.key});
@@ -24,17 +26,15 @@ class _HomeUIState extends State<HomeUI> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     MainPageUI(),
-    LoyaltyUI(),
-    HistoryUI(),
+    StepperHome(),
+    UserTest(),
     UserProfileUI()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: Container(
           color: Colors.deepPurple.shade400,
           child: Padding(
