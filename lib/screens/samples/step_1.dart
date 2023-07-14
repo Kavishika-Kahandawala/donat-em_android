@@ -83,7 +83,7 @@ class _StepSampleState extends State<StepSample> {
 
         const SizedBox(height: 10),
 
-        InputTextArea2(
+        InputTextArea1(
           controller: fnameController,
           hintText: 'Last Name',
           obscureText: false,
