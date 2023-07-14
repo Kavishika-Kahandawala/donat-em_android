@@ -52,6 +52,9 @@ dependencies:
   # Animations
   lottie: ^2.4.0
   linear_progress_bar: ^1.1.0
+  progress_bar_steppers: ^0.0.2+2
+  jiffy: ^6.2.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

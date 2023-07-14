@@ -46,6 +46,7 @@ class _RegisterUIState extends State<RegisterUI> {
           email: emailController.text.trim(),
           password: passController.text.trim());
 
+      // Get current logged user id
       String id = FirebaseAuth.instance.currentUser!.uid.toString();
 
       addUserDetails(id, emailController.text.trim());
@@ -111,7 +112,7 @@ class _RegisterUIState extends State<RegisterUI> {
     await FirebaseFirestore.instance.collection('users').doc(uid).set({
       'first_name': '',
       'last_name': '',
-      'email': '',
+      'email': email,
       'age': '',
       'reg_step':0,
     });

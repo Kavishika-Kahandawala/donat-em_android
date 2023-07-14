@@ -1,7 +1,9 @@
+import 'package:donatem/screens/main/addproduct/product_desc.dart';
+import 'package:donatem/screens/samples/step_auth.dart';
 import 'package:donatem/screens/main/history.dart';
 import 'package:donatem/screens/main/home.dart';
 import 'package:donatem/screens/main/user_profile.dart';
-import 'package:donatem/screens/main/userdata.dart';
+import 'package:donatem/screens/samples/userdata.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -24,11 +26,11 @@ class _HomeUIState extends State<HomeUI> {
     FirebaseAuth.instance.signOut();
   }
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    MainPageUI(),
-    StepperHome(),
-    UserTest(),
-    UserProfileUI()
+  static final List<Widget> _widgetOptions = <Widget>[
+    const MainPageUI(),
+    const StepperHome(),
+    const ProductDetails(),
+    const UserProfileUI()
   ];
 
   @override

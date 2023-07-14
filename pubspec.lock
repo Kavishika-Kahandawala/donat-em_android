@@ -232,6 +232,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
+  jiffy:
+    dependency: "direct main"
+    description:
+      name: jiffy
+      sha256: cc1d4b75016a9156c29b5d61f0c9176c3e0fb0580cc5a0e0422b5d2cab3fbfff
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.1"
   js:
     dependency: transitive
     description:
@@ -376,6 +392,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  progress_bar_steppers:
+    dependency: "direct main"
+    description:
+      name: progress_bar_steppers
+      sha256: "7dd665ae7aa1f18eb199f544374cbc4605cddeb55f706f11e49a461e8ee13d6d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2+2"
   sky_engine:
     dependency: transitive
     description: flutter
