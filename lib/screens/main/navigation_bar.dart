@@ -1,4 +1,4 @@
-import 'package:donatem/screens/main/addproduct/product_desc.dart';
+import 'package:donatem/screens/main/additem/item_desc.dart';
 import 'package:donatem/screens/samples/step_auth.dart';
 import 'package:donatem/screens/main/history.dart';
 import 'package:donatem/screens/main/home.dart';
@@ -29,7 +29,7 @@ class _HomeUIState extends State<HomeUI> {
   static final List<Widget> _widgetOptions = <Widget>[
     const MainPageUI(),
     const StepperHome(),
-    const ProductDetails(),
+    const ItemDetails(),
     const UserProfileUI()
   ];
 

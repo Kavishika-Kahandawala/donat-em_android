@@ -1,0 +1,107 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../shared/inputButton_1.dart';
+import '../../../shared/inputTextArea_1.dart';
+import '../../../shared/inputTextArea_2.dart';
+
+class ItemDetails extends StatefulWidget {
+  const ItemDetails({super.key});
+
+  @override
+  State<ItemDetails> createState() => _ItemDetailsState();
+}
+
+class _ItemDetailsState extends State<ItemDetails> {
+  // Input controllers
+  final itemNameController = TextEditingController();
+  final itemDescController = TextEditingController();
+
+// Get current logged user id
+  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  
+  // Next method
+  Future nextStep() async {
+    // show loading icon
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+    await FirebaseFirestore.instance.collection('donation items').add(
+      {
+        'uid': uid,
+        'status': 0,
+      },
+    );
+    //pop loading circle
+    Navigator.pop(context);
+    // {
+    //   await Navigator.push(context, MaterialPageRoute(
+    //     builder: (context) {
+    //       return const StepperHome();
+    //     },
+    //   ));
+    // }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                Text(
+                  'Add an item to donate',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
+                  ),
+                ),
+                Text(
+                  'Together let\'s help each other who are in need',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                InputTextArea1(
+                  controller: itemNameController,
+                  hintText: 'Item Name',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 20),
+                InputTextArea2(
+                  controller: itemDescController,
+                  hintText: 'Item Description',
+                  obscureText: false,
+                  minLines: 5,
+                  maxLines: 5,
+                ),
+                const SizedBox(height: 20),
+
+                // Next  button
+                InputButton1(
+                  onTap: nextStep,
+                  text: 'Next',
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

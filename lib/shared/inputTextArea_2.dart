@@ -4,12 +4,16 @@ class InputTextArea2 extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
+  final int minLines;
+  final int maxLines;
 
   const InputTextArea2({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    required this.minLines,
+    required this.maxLines,
   });
 
   @override
@@ -26,8 +30,10 @@ class InputTextArea2 extends StatelessWidget {
         fillColor: Colors.grey.shade200,
         filled: true,
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey[500])
+        hintStyle: TextStyle(color: Colors.grey[500]),
       ),
+      minLines: minLines,
+      maxLines: maxLines,
     );
   }
 }

@@ -30,10 +30,13 @@ class _RegStepMobileState extends State<RegStepMobile> {
             child: CircularProgressIndicator(),
           );
         });
-    await FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'mobile_number': fnameController.text.trim(),
-      'reg_step': 3,
-    },SetOptions(merge: true),);
+    await FirebaseFirestore.instance.collection('users').doc(uid).set(
+      {
+        'mobile_number': fnameController.text.trim(),
+        'reg_step': 3,
+      },
+      SetOptions(merge: true),
+    );
     //pop loading circle
     Navigator.pop(context);
     {
@@ -55,7 +58,7 @@ class _RegStepMobileState extends State<RegStepMobile> {
             hintText: 'Phone Number',
             obscureText: false),
         const SizedBox(height: 30),
-        InputButton1(onTap: addUserRegData, text: 'Submit')
+        InputButton1(onTap: addUserRegData, text: 'Submit'),
       ],
     );
   }
