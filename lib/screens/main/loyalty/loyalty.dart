@@ -1,3 +1,4 @@
+import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
 
 class LoyaltyUI extends StatefulWidget {
@@ -10,7 +11,7 @@ class LoyaltyUI extends StatefulWidget {
 class _LoyaltyUIState extends State<LoyaltyUI> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -19,10 +20,11 @@ class _LoyaltyUIState extends State<LoyaltyUI> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Loaylty page')
-                  //TODO: for accounts page
-                  // Text('Logged in as : ' + user.email!),
-                  // IconButton(onPressed: signOutUser, icon: Icon(Icons.logout)),
+                  const Text('Loyalty Points'),
+                  const Text('100'),
+                  //Redeem info
+                  const Text('How to redeem sentences here'),
+                  InputButton1(onTap: onTap, text: 'Scan QR')
                 ],
               ),
             ),

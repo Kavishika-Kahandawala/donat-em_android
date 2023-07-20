@@ -1,9 +1,6 @@
 import 'package:donatem/screens/main/additem/item_desc.dart';
-import 'package:donatem/screens/samples/step_auth.dart';
-import 'package:donatem/screens/main/history.dart';
-import 'package:donatem/screens/main/home.dart';
+import 'package:donatem/screens/main/home/home.dart';
 import 'package:donatem/screens/main/user_profile.dart';
-import 'package:donatem/screens/samples/userdata.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';

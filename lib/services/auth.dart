@@ -1,3 +1,4 @@
+import 'package:donatem/screens/authenticate/reg_steppers/stepper_reg_auth.dart';
 import 'package:donatem/screens/main/navigation_bar.dart';
 import 'package:donatem/screens/on_board_screen/on_board.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,14 +13,13 @@ class AuthService extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          
           //user logged in
-          if (snapshot.hasData){
-            return const HomeUI();
+          if (snapshot.hasData) {
+            return StepRegAuth();
           }
 
           //user hasn't logged in
-          else{
+          else {
             return const OnBoardingScreen();
           }
         },

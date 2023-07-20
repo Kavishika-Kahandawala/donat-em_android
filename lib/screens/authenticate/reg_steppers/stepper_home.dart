@@ -7,6 +7,8 @@ import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:progress_bar_steppers/steppers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'stepper_reg_auth.dart';
+
 class StepperHome extends StatefulWidget {
   const StepperHome({super.key});
 
@@ -102,7 +104,7 @@ class _StepperHomeState extends State<StepperHome> {
                     ] else if (currentStep == 3) ...[
                       const RegStepMobile(),
                     ] else if (currentStep == 4) ...[
-                      const RegStepDob(),
+                      StepRegAuth(),
                     ],
                   ],
                 ),

@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/stepper_home.dart';
 import 'package:donatem/shared/inputButton_1.dart';
-import 'package:donatem/shared/inputTextArea_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:jiffy/jiffy.dart';
 
 class RegStepDob extends StatefulWidget {
   const RegStepDob({super.key});

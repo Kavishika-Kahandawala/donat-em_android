@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/additem/item_cat.dart';
+import 'package:donatem/shared/app_colors.dart';
+import 'package:donatem/shared/card_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,21 +9,19 @@ import '../../../shared/inputButton_1.dart';
 import '../../../shared/inputTextArea_1.dart';
 import '../../../shared/inputTextArea_2.dart';
 
-class ItemDetails extends StatefulWidget {
-  const ItemDetails({super.key});
+class ItemImage extends StatefulWidget {
+  // Item Id
+  final String itemDocId;
+
+  const ItemImage({super.key, required this.itemDocId});
 
   @override
-  State<ItemDetails> createState() => _ItemDetailsState();
+  State<ItemImage> createState() => _ItemImageState();
 }
 
-class _ItemDetailsState extends State<ItemDetails> {
-  // Input controllers
-  final itemNameController = TextEditingController();
-  final itemDescController = TextEditingController();
-
-// Get current logged user id
+class _ItemImageState extends State<ItemImage> {
+  // Get current logged user id
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
-  dynamic returnDocID;
 
   // Next method
   Future nextStep() async {
@@ -34,23 +33,24 @@ class _ItemDetailsState extends State<ItemDetails> {
             child: CircularProgressIndicator(),
           );
         });
-    returnDocID =
-        await FirebaseFirestore.instance.collection('donation items').add(
+    await FirebaseFirestore.instance
+        .collection('donation items')
+        .doc(widget.itemDocId)
+        .set(
       {
-        'uid': uid,
-        'status': 0,
+        // 'item_tags': itemTagController.text.trim(),
       },
+      SetOptions(merge: true),
     );
-
     //pop loading circle
     Navigator.pop(context);
-    {
-      await Navigator.push(context, MaterialPageRoute(
-        builder: (context) {
-          return ItemCategory(itemDocId: returnDocID.toString());
-        },
-      ));
-    }
+    // {
+    //   await Navigator.push(context, MaterialPageRoute(
+    //     builder: (context) {
+    //       return const StepperHome();
+    //     },
+    //   ));
+    // }
   }
 
   @override
@@ -66,36 +66,29 @@ class _ItemDetailsState extends State<ItemDetails> {
               children: [
                 const SizedBox(height: 20),
                 Text(
-                  'Add an item to donate',
+                  'Enter tags to make it easier for users to find',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: 32,
                   ),
                 ),
-                Text(
-                  'Together, let\'s help each others who are in need',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.grey.shade400,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                InputTextArea1(
-                  controller: itemNameController,
-                  hintText: 'Item Name',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 20),
-                InputTextArea2(
-                  controller: itemDescController,
-                  hintText: 'Item Description',
-                  obscureText: false,
-                  minLines: 5,
-                  maxLines: 5,
-                ),
                 const SizedBox(height: 20),
 
+                // Add image icon
+                
+                GestureDetector(
+                  onTap: selectImage,
+                  child: Container(
+                      // margin: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(3.5),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.deepPurple.shade300)),
+                      child: Icon(
+                        Icons.date_range,
+                        color: Colors.deepPurple.shade300,
+                      )),
+                ),
                 // Next  button
                 InputButton1(
                   onTap: nextStep,
