@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class Card1 extends StatelessWidget {
   final Color backgroundColor;
@@ -15,20 +16,28 @@ class Card1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: 155,
-      // width: 192,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(heading),
-          Text(subHeading),
-          Expanded(child: Icon(iconName as IconData?))
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        // height: 155,
+        // width: 192,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(heading),
+            Text(subHeading),
+            // Expanded(
+            //   child: Icon(
+            //     LineIcons.byName(iconName),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }

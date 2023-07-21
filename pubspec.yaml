@@ -55,6 +55,9 @@ dependencies:
   progress_bar_steppers: ^0.0.2+2
   jiffy: ^6.2.1
   intl: ^0.18.1
+  camera: ^0.10.5+2
+  line_icons: ^2.0.3
+  easy_sidemenu: ^0.4.2
 
 dev_dependencies:
   flutter_test:

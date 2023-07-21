@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/item_cat.dart';
+import 'package:donatem/shared/card_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../shared/app_colors.dart';
+import '../../../shared/card_1.dart';
 import '../../../shared/inputButton_1.dart';
 import '../../../shared/inputTextArea_1.dart';
 import '../../../shared/inputTextArea_2.dart';
@@ -19,6 +22,8 @@ class _ItemDetailsState extends State<ItemDetails> {
   // Input controllers
   final itemNameController = TextEditingController();
   final itemDescController = TextEditingController();
+
+  List<int> selectedItems = [];
 
 // Get current logged user id
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -37,6 +42,8 @@ class _ItemDetailsState extends State<ItemDetails> {
     returnDocID =
         await FirebaseFirestore.instance.collection('donation items').add(
       {
+        'product_name': itemNameController.text.trim(),
+        'product_desc': itemDescController.text.trim(),
         'uid': uid,
         'status': 0,
       },
@@ -80,7 +87,22 @@ class _ItemDetailsState extends State<ItemDetails> {
                     color: Colors.grey.shade400,
                   ),
                 ),
-                const SizedBox(height: 20),
+                // SizedBox(
+                //   child: Row(
+                //     children: [
+                //       Card2(
+                //           heading: 'heading',
+                //           subHeading: 'subHeading',
+                //           imageUrl: 'books'),
+                //       Card2(
+                //           heading: 'heading',
+                //           subHeading: 'subHeading',
+                //           imageUrl: 'books'),
+                          
+                //     ],
+                //   ),
+                // ),
+
                 InputTextArea1(
                   controller: itemNameController,
                   hintText: 'Item Name',

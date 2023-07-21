@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class Card2 extends StatelessWidget {
   // Org Name
@@ -20,7 +21,8 @@ class Card2 extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset(imageUrl, width: 40),
+            // Image.asset(imageUrl, width: 40),
+            Icon(LineIcons.byName('book')),
             const SizedBox(height: 10),
             
             // Heading
