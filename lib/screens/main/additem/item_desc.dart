@@ -3,6 +3,7 @@ import 'package:donatem/screens/main/additem/item_cat.dart';
 import 'package:donatem/shared/card_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/app_colors.dart';
@@ -19,6 +20,7 @@ class ItemDetails extends StatefulWidget {
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
+  
   // Input controllers
   final itemNameController = TextEditingController();
   final itemDescController = TextEditingController();
@@ -52,11 +54,12 @@ class _ItemDetailsState extends State<ItemDetails> {
     //pop loading circle
     Navigator.pop(context);
     {
-      await Navigator.push(context, MaterialPageRoute(
-        builder: (context) {
-          return ItemCategory(itemDocId: returnDocID.toString());
-        },
-      ));
+      // await Navigator.push(context, MaterialPageRoute(
+      //   builder: (context) {
+      //     return ItemCategory(itemDocId: returnDocID.toString());
+      //   },
+      // ));
+      Get.to(()=> const ItemCategory(), arguments: [returnDocID.id.toString()]);
     }
   }
 

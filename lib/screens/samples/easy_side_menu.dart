@@ -65,13 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       Theme.of(context).colorScheme.surfaceTint.blue,
                       0.08),
                   Colors.blue[100]!),
-              selectedColor: Colors.lightBlue,
-              selectedTitleTextStyle: const TextStyle(color: Colors.white),
-              selectedIconColor: Colors.white,
+              selectedColor: Colors.white,
+              selectedTitleTextStyle: const TextStyle(color: Colors.black),
+              selectedIconColor: Colors.black,
               // decoration: BoxDecoration(
               //   borderRadius: BorderRadius.all(Radius.circular(10)),
               // ),
-              // backgroundColor: Colors.blueGrey[700]
+              backgroundColor: Colors.blueGrey[700]
             ),
             title: Column(
               children: [
@@ -155,20 +155,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 icon: const Icon(Icons.settings),
               ),
-              // SideMenuItem(
-              //   priority: 5,
-              //   onTap:(index, _){
-              //     sideMenu.changePage(index);
-              //   },
-              //   icon: const Icon(Icons.image_rounded),
-              // ),
-              // SideMenuItem(
-              //   priority: 6,
-              //   title: 'Only Title',
-              //   onTap:(index, _){
-              //     sideMenu.changePage(index);
-              //   },
-              // ),
               const SideMenuItem(
                 priority: 7,
                 title: 'Exit',

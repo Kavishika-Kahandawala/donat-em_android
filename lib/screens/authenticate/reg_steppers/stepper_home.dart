@@ -1,3 +1,4 @@
+import 'package:donatem/screens/authenticate/reg_steppers/step_location.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/step_mobile_number.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/step_name.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/step_dob.dart';
@@ -27,11 +28,15 @@ class _StepperHomeState extends State<StepperHome> {
   Future getDocId() async {
     await FirebaseFirestore.instance.collection('users').doc(uid).get().then(
         (querySnapshot) {
-      print('>>>>>>>>>> came here');
-      print(querySnapshot.data());
-      print(querySnapshot.get('reg_step'));
       setState(() {
         currentStep = querySnapshot.get('reg_step') + 1;
+        if (currentStep==5) {
+          Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const StepRegAuth();
+          },
+        ));
+        }
       });
     }, onError: (e) {
       print(e);
@@ -57,6 +62,7 @@ class _StepperHomeState extends State<StepperHome> {
   void initState() {
     // TODO: implement initState
     getDocId();
+    print('uid>>>>>>>>>>>>>>>>'+uid);
     super.initState();
   }
 
@@ -104,7 +110,7 @@ class _StepperHomeState extends State<StepperHome> {
                     ] else if (currentStep == 3) ...[
                       const RegStepMobile(),
                     ] else if (currentStep == 4) ...[
-                      StepRegAuth(),
+                      const RegStepLocation(),
                     ],
                   ],
                 ),
