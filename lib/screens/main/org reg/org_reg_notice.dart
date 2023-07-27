@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../shared/inputButton_1.dart';
 
 
-class ItemPhotoVerifyNotice extends StatelessWidget {
-  const ItemPhotoVerifyNotice({super.key});
+class OrgRegNotice extends StatelessWidget {
+  const OrgRegNotice({super.key});
 
   void onTap() async {
     Get.to(() => const DonationPhotoAuth(),
@@ -39,7 +39,7 @@ class ItemPhotoVerifyNotice extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    AppAgreementText.itemPhotoVerifyNoticeDonate,
+                    AppAgreementText.orgRegNotice,
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,

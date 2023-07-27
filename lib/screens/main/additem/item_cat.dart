@@ -1,18 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/cat_grids/grid_1.dart';
-import 'package:donatem/screens/main/additem/item_tags.dart';
-import 'package:donatem/shared/app_colors.dart';
-import 'package:donatem/shared/card_1.dart';
-import 'package:donatem/shared/cat_Grid.dart';
-import 'package:donatem/shared/circle_avatar_1.dart';
-import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../../../shared/inputButton_1.dart';
-import 'item_photo_verify_notice.dart';
 
 class ItemCategory extends StatefulWidget {
   // Item Id

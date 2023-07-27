@@ -1,5 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/additem/item_desc.dart';
+import 'package:donatem/screens/main/edit%20user/edit_user_details.dart';
+import 'package:donatem/screens/main/org%20reg/org_reg_notice.dart';
+import 'package:donatem/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'edit user/get_details.dart';
 
 class UserProfileUI extends StatefulWidget {
   const UserProfileUI({super.key});
@@ -9,31 +18,147 @@ class UserProfileUI extends StatefulWidget {
 }
 
 class _UserProfileUIState extends State<UserProfileUI> {
+  // firebase uid
   final user = FirebaseAuth.instance.currentUser!;
-  //
-  //sign User Out
+
+  // firestore strings
+  String firstName = '';
+
+  int orgRegStatus = 0;
+  int recRegStatus = 0;
+
+  Future loadUserInfo() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((querySnapshot) {
+      setState(() {
+        firstName = querySnapshot.get('first_name');
+        recRegStatus = querySnapshot.get('receiver_reg_status');
+        orgRegStatus = querySnapshot.get('org_reg_status');
+
+      });
+    });
+  }
+
   void signOutUser() {
     FirebaseAuth.instance.signOut();
+    Get.to(() => const AuthService());
+  }
+
+  @override
+  void initState() {
+    loadUserInfo();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+        children: [
+          // User details banner
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('User account page'),
-                //TODO: for accounts page
-                Text('Logged in as : ${user.uid}'),
-                IconButton(onPressed: signOutUser, icon: const Icon(Icons.logout)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    Text(
+                      'Hello,',
+                      style: GoogleFonts.poppins(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      firstName,
+                      style: GoogleFonts.poppins(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple[100],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.person),
+                ),
               ],
             ),
           ),
-        ),
-      ),
+          // blank box to separate
+          const SizedBox(height: 20),
+          // List view starts from here
+          Expanded(
+              child: ListTileTheme(
+            selectedColor: Colors.black,
+            child: ListView(
+              children: [
+                ListTile(
+                  title: const Text('Donate an item'),
+                  onTap: () {
+                    Get.to(() => const ItemDetails());
+                  },
+                ),
+                ListTile(
+                  title: const Text('Edit profile'),
+                  onTap: () {
+                    Get.to(() => const EditUserDetails());
+                  },
+                ),
+                // If user is a receiver
+                if (recRegStatus == 1) ...[
+                  ListTile(
+                    title: const Text('View Recipient Details'),
+                    onTap: () {
+                      Get.to(() => const EditUserDetails());
+                    },
+                  )
+                ] else ...[
+                  ListTile(
+                  title: const Text('Apply as a recipient'),
+                  onTap: () {
+                    Get.to(() => const EditUserDetails());
+                  },
+                ),
+                ],
+                // If user has an organization
+                if (orgRegStatus == 1) ...[
+                  ListTile(
+                    title: const Text('View Organization Details'),
+                    onTap: () {
+                      Get.to(() => const EditUserDetails());
+                    },
+                  )
+                ] else ...[
+                  ListTile(
+                  title: const Text('Apply as an organization'),
+                  onTap: () {
+                    Get.to(() => const OrgRegNotice());
+                  },
+                ),
+                ],
+                ListTile(
+                  title: const Text('Log Out'),
+                  onTap: () {
+                    signOutUser();
+                  },
+                ),
+              ],
+            ),
+          ))
+        ],
+      )),
     );
   }
 }

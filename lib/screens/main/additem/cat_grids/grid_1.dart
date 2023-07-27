@@ -1,13 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/additem/item_thanks.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../shared/circle_avatar_1.dart';
 import '../item_photo_verify_notice.dart';
-import '../item_tags.dart';
 
 class CatGrid1 extends StatefulWidget {
   // Item Id
@@ -47,7 +45,6 @@ class _CatGrid1State extends State<CatGrid1> {
       //     return const ItemThanks();
       //   },
       // ));
-      print("tem doc id grid 1 >>>>>>>>>>>>>>>>>"+widget.itemDocId);
       Get.to(()=> const ItemPhotoVerifyNotice(), arguments: [Get.arguments[0].toString()]);
     }
 

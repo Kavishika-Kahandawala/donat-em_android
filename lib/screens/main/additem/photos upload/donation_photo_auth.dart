@@ -36,7 +36,6 @@ class _DonationPhotoAuthState extends State<DonationPhotoAuth> {
   @override
   void initState() {
     regIncomplete();
-    print('donation photo auth >>>>>>>>>>>>>'+Get.arguments[0].toString());
     super.initState();
   }
 

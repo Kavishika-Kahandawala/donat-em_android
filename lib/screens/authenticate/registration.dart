@@ -113,7 +113,6 @@ class _RegisterUIState extends State<RegisterUI> {
       'first_name': '',
       'last_name': '',
       'email': email,
-      'age': '',
       'reg_step':0,
     });
   }

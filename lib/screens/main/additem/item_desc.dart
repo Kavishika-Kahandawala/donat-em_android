@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/item_cat.dart';
-import 'package:donatem/shared/card_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../shared/app_colors.dart';
-import '../../../shared/card_1.dart';
 import '../../../shared/inputButton_1.dart';
 import '../../../shared/inputTextArea_1.dart';
 import '../../../shared/inputTextArea_2.dart';
