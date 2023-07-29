@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/additem/item_thanks.dart';
-import 'package:donatem/screens/main/additem/photos%20upload/photo_upload_1.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
 import 'package:donatem/screens/main/rec%20reg/rec_reg_photo_upload.dart';
 import 'package:donatem/screens/main/rec%20reg/rec_reg_thanks.dart';
 import 'package:donatem/shared/circular_loading.dart';

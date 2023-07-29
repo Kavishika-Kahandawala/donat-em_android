@@ -1,7 +1,5 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/additem/photos%20upload/donation_photo_auth.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
 import 'package:donatem/screens/main/rec%20reg/rec_reg_identity_photo_auth.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:dotted_border/dotted_border.dart';

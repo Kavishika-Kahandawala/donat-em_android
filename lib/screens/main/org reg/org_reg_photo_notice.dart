@@ -1,5 +1,3 @@
-import 'package:donatem/screens/main/additem/item_thanks.dart';
-import 'package:donatem/screens/main/additem/photos%20upload/donation_photo_auth.dart';
 import 'package:donatem/screens/main/org%20reg/org_reg_photo_upload.dart';
 import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
 import 'package:donatem/shared/app_agreement_text.dart';

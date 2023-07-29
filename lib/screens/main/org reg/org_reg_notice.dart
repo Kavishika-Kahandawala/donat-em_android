@@ -1,11 +1,8 @@
-import 'package:donatem/screens/main/additem/photos%20upload/donation_photo_auth.dart';
 import 'package:donatem/screens/main/org%20reg/org_reg_desc.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'org_reg_desc.dart';
-
 import '../../../shared/inputButton_1.dart';
 
 class OrgRegNotice extends StatelessWidget {

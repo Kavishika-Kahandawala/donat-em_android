@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'edit user/get_details.dart';
 
 class UserProfileUI extends StatefulWidget {
   const UserProfileUI({super.key});
