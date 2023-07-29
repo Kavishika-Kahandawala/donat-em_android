@@ -64,10 +64,7 @@ dependencies:
   firebase_storage: ^11.2.5
   dotted_border: ^2.0.0+3
   percent_indicator: ^4.2.3
-
-  # The following adds the HERE SDK for Flutter plugin folder to your application.
-  here_sdk:
-    path: plugins/here_sdk
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:

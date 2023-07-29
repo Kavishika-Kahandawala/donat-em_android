@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../authenticate/reg_steppers/stepper_home.dart';
+import '../samples/maps_search.dart';
 
 class HomeUI extends StatefulWidget {
   const HomeUI({super.key});
@@ -25,7 +26,7 @@ class _HomeUIState extends State<HomeUI> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const MainPageUI(),
-    const StepperHome(),
+    const MapTestSearch(),
     const ItemDetails(),
     const UserProfileUI()
   ];

@@ -1,19 +1,27 @@
-import 'package:donatem/screens/main/additem/photos%20upload/donation_photo_auth.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_desc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/rec%20reg/rec_reg_photo_notice.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'org_reg_desc.dart';
 
 import '../../../shared/inputButton_1.dart';
 
-class OrgRegNotice extends StatelessWidget {
-  const OrgRegNotice({super.key});
+class RecRegNotice extends StatelessWidget {
+  RecRegNotice({super.key});
 
-
-  void onTap() async {
-    Get.to(() => const OrgRegGetDetails());
+  final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  Future onTap() async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).set(
+      {
+        'rec_reg_identity_photo_step': 0,
+      },
+      SetOptions(merge: true),
+    );
+    {
+      await Get.to(() => const RecRegPhotoNotice());
+    }
   }
 
   @override
@@ -29,7 +37,7 @@ class OrgRegNotice extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'User Agreement signing up as an organization',
+                    'User Agreement for signing up as a recipient',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -38,7 +46,7 @@ class OrgRegNotice extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    AppAgreementText.orgRegNotice,
+                    AppAgreementText.recRegNotice,
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,

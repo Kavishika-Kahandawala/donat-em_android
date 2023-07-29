@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/photos%20upload/donation_photo_auth.dart';
+import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,32 +14,24 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class PhotoUploadUI1 extends StatefulWidget {
-  const PhotoUploadUI1({super.key});
+class OrgRegPhotoUpload extends StatefulWidget {
+  const OrgRegPhotoUpload({super.key});
 
   @override
-  State<PhotoUploadUI1> createState() => _PhotoUploadUI1State();
+  State<OrgRegPhotoUpload> createState() => _OrgRegPhotoUploadState();
 }
 
-class _PhotoUploadUI1State extends State<PhotoUploadUI1> {
+class _OrgRegPhotoUploadState extends State<OrgRegPhotoUpload> {
   XFile? _pickedFile;
   CroppedFile? _croppedFile;
 
   bool uploadStatus = false;
-  // final
-
-  // For firebase storage
-  // final uploadPath = '/Donation Items/Item Images';
-  // final ref = FirebaseStorage.instance.ref().child('/Donation Items/Item Images');
-  // FirebaseStorage storage = FirebaseStorage.instance;
-  // Reference ref =
-      // FirebaseStorage.instance.ref().child('/Donation Items/Item Images');
   UploadTask? uploadTask;
 
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
   Future<void> _uploadImageFirebase() async {
-    final path = '/Donation Items/Item Images/${DateTime.now().millisecondsSinceEpoch.toString()}${uid.toString()}';
+    final path = '/Organizations/Organization Images/${DateTime.now().millisecondsSinceEpoch.toString()}${Get.arguments[0].toString()}';
     final file;
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -56,17 +49,14 @@ class _PhotoUploadUI1State extends State<PhotoUploadUI1> {
     final urlDownload = await snapshot.ref.getDownloadURL();
 
     await FirebaseFirestore.instance
-        .collection('donation items')
-        .doc(Get.arguments[0])
+        .collection('organizations')
+        .doc(Get.arguments[0].toString())
         .set(
       {
-        'item_image_url_' + Get.arguments[1]: urlDownload,
-        'image_count': int.parse(Get.arguments[1]),
+        'organization_banner': urlDownload,
       },
       SetOptions(merge: true),
     );
-
-    print('Download-Link: $urlDownload');
   }
 
   void toggleUploadStatus() {
@@ -76,10 +66,9 @@ class _PhotoUploadUI1State extends State<PhotoUploadUI1> {
   }
 
 
-
   //Go next
   void next() {
-    Get.to(() => const DonationPhotoAuth(),
+    Get.to(() => const OrgRegThanks(),
         arguments: [Get.arguments[0].toString()]);
   }
 
@@ -268,13 +257,6 @@ class _PhotoUploadUI1State extends State<PhotoUploadUI1> {
                           const SizedBox(height: 24.0),
                           Text(
                             'Upload an image to start',
-                            style: TextStyle(
-                              color: Colors.deepPurple.shade200,
-                            ),
-                          ),
-                          const SizedBox(height: 5.0),
-                          Text(
-                            Get.arguments[1] + '/3',
                             style: TextStyle(
                               color: Colors.deepPurple.shade200,
                             ),

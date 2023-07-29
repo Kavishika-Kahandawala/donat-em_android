@@ -1,21 +1,26 @@
+import 'package:donatem/screens/main/additem/item_thanks.dart';
 import 'package:donatem/screens/main/additem/photos%20upload/donation_photo_auth.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_desc.dart';
+import 'package:donatem/screens/main/org%20reg/org_reg_photo_upload.dart';
+import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'org_reg_desc.dart';
 
 import '../../../shared/inputButton_1.dart';
 
-class OrgRegNotice extends StatelessWidget {
-  const OrgRegNotice({super.key});
-
+class OrgRegPhotoNotice extends StatelessWidget {
+  const OrgRegPhotoNotice({super.key});
 
   void onTap() async {
-    Get.to(() => const OrgRegGetDetails());
+    print(Get.arguments[0]);
+    Get.to(() => const OrgRegPhotoUpload(), arguments: [Get.arguments[0].toString()]);
+  }
+  void skip() async {
+    Get.to(() => const OrgRegThanks(), arguments: [Get.arguments[0].toString()]);
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +34,7 @@ class OrgRegNotice extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'User Agreement signing up as an organization',
+                    'Add a photo of your organization',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -38,27 +43,17 @@ class OrgRegNotice extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    AppAgreementText.orgRegNotice,
+                    AppAgreementText.orgRegPhotoNotice,
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,
                     ),
                     // textAlign: TextAlign.left,
                   ),
-                  const SizedBox(height: 60),
-                  Divider(thickness: 1, color: Colors.grey.shade300),
-                  Text(
-                    'By continuing you agree to the Donat\'em terms and conditions',
-                    style: GoogleFonts.poppins(
-                      color: Colors.grey.shade400,
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 100),
+                  InputButton1(onTap: skip, text: "Skip"),
+                  const SizedBox(height: 15),
                   InputButton1(onTap: onTap, text: "Continue"),
-
-                  // textAlign: TextAlign.left,
                   const SizedBox(height: 30),
                 ],
               ),

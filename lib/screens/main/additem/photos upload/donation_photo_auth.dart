@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/item_thanks.dart';
 import 'package:donatem/screens/main/additem/photos%20upload/photo_upload_1.dart';
+import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
 import 'package:donatem/shared/circular_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
