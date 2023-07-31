@@ -45,7 +45,7 @@ class OrgRegNotice extends StatelessWidget {
                   const SizedBox(height: 60),
                   Divider(thickness: 1, color: Colors.grey.shade300),
                   Text(
-                    'By continuing you agree to the Donat\'em terms and conditions',
+                    'By continuing I agree to the Donat\'em terms and conditions',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 16,

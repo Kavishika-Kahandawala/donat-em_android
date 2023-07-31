@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/item_desc.dart';
 import 'package:donatem/screens/main/edit%20user/edit_user_details.dart';
 import 'package:donatem/screens/main/org%20reg/org_reg_notice.dart';
+import 'package:donatem/screens/main/org%20ui/org_ui_main.dart';
 import 'package:donatem/screens/main/rec%20reg/rec_reg_notice.dart';
+import 'package:donatem/screens/main/rec%20ui/rec_ui_main.dart';
 import 'package:donatem/screens/main/wait%20for%20verify/wait_for_verify_notice.dart';
 import 'package:donatem/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,9 +121,9 @@ class _UserProfileUIState extends State<UserProfileUI> {
                     // If user is a receiver
                     if (recRegStatus == 1) ...[
                       ListTile(
-                        title: const Text('View Recipient Details'),
+                        title: const Text('View as recipient'),
                         onTap: () {
-                          Get.to(() => const EditUserDetails());
+                          Get.to(() => const RecMainUI());
                         },
                       )
                     ] else if (recRegStatus == 2) ...[
@@ -142,9 +144,9 @@ class _UserProfileUIState extends State<UserProfileUI> {
                     // If user has an organization
                     if (orgRegStatus == 1) ...[
                       ListTile(
-                        title: const Text('View Organization Details'),
+                        title: const Text('View as organization'),
                         onTap: () {
-                          Get.to(() => const EditUserDetails());
+                          Get.to(() => const OrgMainUI());
                         },
                       )
                     ] else if (orgRegStatus == 2) ...[

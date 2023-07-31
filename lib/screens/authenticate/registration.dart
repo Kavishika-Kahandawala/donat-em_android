@@ -123,7 +123,7 @@ class _RegisterUIState extends State<RegisterUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: Center(
         child: Padding(

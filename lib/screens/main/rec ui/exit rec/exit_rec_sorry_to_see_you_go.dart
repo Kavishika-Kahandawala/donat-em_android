@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RecRegThanks extends StatelessWidget {
-  const RecRegThanks({super.key});
+class ExitRecSorryToGoNotice extends StatelessWidget {
+  const ExitRecSorryToGoNotice({super.key});
 
   void onTap() async {
-    Get.to(()=> const HomeUI());
+    Get.to(() => const HomeUI());
   }
 
   @override
@@ -25,7 +25,7 @@ class RecRegThanks extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'Thank you for signing up as a recipient',
+                    'Everything comes to an end',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -34,7 +34,7 @@ class RecRegThanks extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    'We received your application and will review it as soon as possible. We might contact you via Email.',
+                    'We are sorry to see you go. Join in anytime if you change your mind',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,

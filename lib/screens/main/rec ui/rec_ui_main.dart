@@ -1,18 +1,18 @@
-import 'package:donatem/screens/main/org%20ui/exit%20org/exit_org_notice.dart';
 import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_intro.dart';
 import 'package:donatem/screens/main/org%20ui/view_org_avail_event.dart';
+import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_notice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart  ';
 
-class OrgMainUI extends StatefulWidget {
-  const OrgMainUI({super.key});
+class RecMainUI extends StatefulWidget {
+  const RecMainUI({super.key});
 
   @override
-  State<OrgMainUI> createState() => _OrgMainUIState();
+  State<RecMainUI> createState() => _RecMainUIState();
 }
 
-class _OrgMainUIState extends State<OrgMainUI> {
+class _RecMainUIState extends State<RecMainUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class _OrgMainUIState extends State<OrgMainUI> {
             children: [
               const SizedBox(height: 20),
               Text(
-                'Manage Your Organization',
+                'View my recipient account',
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
                   fontSize: 32,
@@ -38,21 +38,21 @@ class _OrgMainUIState extends State<OrgMainUI> {
                   child: ListView(
                     children: [
                       ListTile(
-                        title: const Text('Start an event'),
+                        title: const Text('Edit my preferences'),
                         onTap: () {
                           Get.to(() => const StartOrgEventInto());
                         },
                       ),
                       ListTile(
-                        title: const Text('View my events'),
+                        title: const Text('View my receivable items status'),
                         onTap: () {
                           Get.to(() => const ViewOrgAvailEvents());
                         },
                       ),
                       ListTile(
-                        title: const Text('Exit from organization program'),
+                        title: const Text('Exit from recipient program'),
                         onTap: () {
-                          Get.to(() => const ExitOrgNotice());
+                          Get.to(() => const ExitRecNotice());
                         },
                       ),
                     ],

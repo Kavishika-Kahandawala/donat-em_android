@@ -1,26 +1,54 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/rec%20reg/rec_reg_photo_notice.dart';
+import 'package:donatem/screens/main/org%20reg/org_reg_desc.dart';
+import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_sorry_to_see_you_go.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
+import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../shared/inputButton_1.dart';
+class ExitRecNotice extends StatefulWidget {
+  const ExitRecNotice({super.key});
 
-class RecRegNotice extends StatelessWidget {
-  RecRegNotice({super.key});
+  @override
+  State<ExitRecNotice> createState() => _ExitRecNoticeState();
+}
 
-  final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
-  Future onTap() async {
+class _ExitRecNoticeState extends State<ExitRecNotice> {
+  //Get current logged user id
+  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+  Future deleteData() async {
+    // show loading icon
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+    // change data in collection 'users'
     await FirebaseFirestore.instance.collection('users').doc(uid).set(
       {
-        'rec_reg_identity_photo_step': 0,
+        'receiver_reg_status': 0,
       },
       SetOptions(merge: true),
     );
+    // delete data in collection 'users'
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'rec_reg_identity_photo_type': FieldValue.delete(),
+      'rec_reg_identity_photo_step': FieldValue.delete()
+    });
+    //delete data in collection 'rec reg identity'
+    await FirebaseFirestore.instance
+        .collection('rec reg identity')
+        .doc(uid)
+        .delete();
+    //pop loading circle
+    Navigator.pop(context);
     {
-      await Get.to(() => const RecRegPhotoNotice());
+      Get.to(() => const ExitRecSorryToGoNotice());
     }
   }
 
@@ -37,7 +65,7 @@ class RecRegNotice extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'User Agreement for signing up as a recipient',
+                    'Please read the following carefully before proceeding',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -46,7 +74,7 @@ class RecRegNotice extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    AppAgreementText.recRegNotice,
+                    AppAgreementText.exitRecNotice,
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,
@@ -56,7 +84,7 @@ class RecRegNotice extends StatelessWidget {
                   const SizedBox(height: 60),
                   Divider(thickness: 1, color: Colors.grey.shade300),
                   Text(
-                    'By continuing I agree to the Donat\'em terms and conditions',
+                    'By continuing I agree to above conditions and I am responsible for my actions.',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 16,
@@ -64,7 +92,8 @@ class RecRegNotice extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 5),
-                  InputButton1(onTap: onTap, text: "Continue"),
+                  InputButton1(
+                      onTap: deleteData, text: "Exit From the program"),
 
                   // textAlign: TextAlign.left,
                   const SizedBox(height: 30),

@@ -33,4 +33,14 @@ abstract class AppAgreementText {
       '8. As a recipient you should not sell the received donation items. You should not use the received donation items for any other purposes like frauds or scams.\n'
       '9. The final decision will be taken by the Donat\'em team\n'
       '10. If you have any questions, please contact us';
+  static const String exitRecNotice =
+      '1. Leaving the recipient program will delete only your recipient account\n'
+      '2. This might include deleting your all data that involves current program\n'
+      '3. Existing from recipient program does not means you are deleting your main Donat\'em user account or organization account if you have one already.\n'
+      '4. This process is not reversible\n';
+  static const String exitOrgNotice =
+      '1. Leaving the organization program will delete only your organization account\n'
+      '2. This might include deleting your all data that involves current program\n'
+      '3. Existing from organization program does not means you are deleting your main Donat\'em user account or recipient account if you have one already.\n'
+      '4. This process is not reversible\n';
 }

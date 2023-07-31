@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RecRegThanks extends StatelessWidget {
-  const RecRegThanks({super.key});
+class StartOrgEventThanks extends StatelessWidget {
+  const StartOrgEventThanks({super.key});
 
   void onTap() async {
     Get.to(()=> const HomeUI());
@@ -25,7 +25,7 @@ class RecRegThanks extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'Thank you for signing up as a recipient',
+                    'Congratulations!',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -34,7 +34,7 @@ class RecRegThanks extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    'We received your application and will review it as soon as possible. We might contact you via Email.',
+                    'Your Event is live on Donat\'em platform',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,
@@ -42,7 +42,7 @@ class RecRegThanks extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 60),
-                  InputButton1(onTap: onTap, text: "Complete Process"),
+                  InputButton1(onTap: onTap, text: "Done"),
                 ],
               ),
             ),

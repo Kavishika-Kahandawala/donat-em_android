@@ -13,7 +13,7 @@ class HeadingSeeAll extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Fundraising events happening now'),
+          Text(heading),
           GestureDetector(onTap: onTap, child: const Text('See all'))
         ],
       ),

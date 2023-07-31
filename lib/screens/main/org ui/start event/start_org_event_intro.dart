@@ -1,16 +1,21 @@
-import 'package:donatem/screens/main/navigation_bar.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_desc.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RecRegThanks extends StatelessWidget {
-  const RecRegThanks({super.key});
+class StartOrgEventInto extends StatefulWidget {
+  const StartOrgEventInto({super.key});
 
-  void onTap() async {
-    Get.to(()=> const HomeUI());
+  @override
+  State<StartOrgEventInto> createState() => _StartOrgEventIntoState();
+}
+
+void onTap() async {
+    Get.to(()=> const StartOrgEventDesc());
   }
 
+class _StartOrgEventIntoState extends State<StartOrgEventInto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +30,7 @@ class RecRegThanks extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'Thank you for signing up as a recipient',
+                    'Let\'s start an event !',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -34,7 +39,7 @@ class RecRegThanks extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    'We received your application and will review it as soon as possible. We might contact you via Email.',
+                    'Together, let\'s help each others who are in need',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,
@@ -42,8 +47,7 @@ class RecRegThanks extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 60),
-                  InputButton1(onTap: onTap, text: "Complete Process"),
-                ],
+                  InputButton1(onTap: onTap, text: "Start an event"),],
               ),
             ),
           ),

@@ -7,7 +7,9 @@ class LoyaltyUI extends StatefulWidget {
   @override
   State<LoyaltyUI> createState() => _LoyaltyUIState();
 }
-
+Future onTap() async {
+  
+}
 class _LoyaltyUIState extends State<LoyaltyUI> {
   @override
   Widget build(BuildContext context) {

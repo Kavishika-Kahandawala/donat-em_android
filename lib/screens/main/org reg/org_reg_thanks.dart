@@ -34,7 +34,7 @@ class OrgRegThanks extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    'We received your application and will review it as soon as possible.',
+                    'We received your application and will review it as soon as possible. We might contact you via Email.',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,
