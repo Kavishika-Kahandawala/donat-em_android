@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/home/happening%20now/home_display_all_events.dart';
+import 'package:donatem/shared/home_streambuilder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart%20%20';
 
-import '../../../shared/card_2.dart';
 import '../../../shared/heading_see_all.dart';
 
 class MainPageUI extends StatefulWidget {
@@ -39,15 +41,15 @@ class _MainPageUIState extends State<MainPageUI> {
   }
 
   Future loadEventsDetails() async {
-    int docLimit=5;
+    int docLimit = 5;
     await FirebaseFirestore.instance
         .collection('org events')
         .limit(docLimit)
         .get()
         .then((querySnapshot) {
-          for (var result in querySnapshot.docs) {
-            eventDocIds.add(result.id);
-          }
+      for (var result in querySnapshot.docs) {
+        eventDocIds.add(result.id);
+      }
       firstName = querySnapshot.docs[0].get('event_name');
       print(eventDocIds);
     });
@@ -102,7 +104,7 @@ class _MainPageUIState extends State<MainPageUI> {
   @override
   void initState() {
     // testHello();
-    loadEventsDetails(); 
+    loadEventsDetails();
     greetings();
     getEventDocIds();
     loadUserInfo();
@@ -165,109 +167,83 @@ class _MainPageUIState extends State<MainPageUI> {
                       //   ListView.builder(itemCount: 3,itemBuilder:(context, index) {
 
                       // },),
-                      const HeadingSeeAll(
+                      HeadingSeeAll(
                         heading: 'Fundraising events happening now',
+                        onTap: () {
+                          Get.to(() => const HomeDisplayAllEvents());
+                        },
                       ),
                       const SizedBox(height: 10),
                       // check whether sized box or container TODO:
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: SizedBox(
-                          height: 120,
-                          child: ListView(
-                            shrinkWrap: true,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: const [
-                              // Cards
-                              Card2(
-                                heading: 'Organization Name',
-                                subHeading: 'Event Heading',
-                                imageUrl: 'lib/assets/images/image1.jpg',
-                              ),
-                              //dummy card
-                              SizedBox(width: 10),
-                              Card2(
-                                heading: 'Organization Name',
-                                subHeading: 'Event Heading',
-                                imageUrl: 'lib/assets/images/image1.jpg',
-                              ),
-                            ],
-                          ),
-                        ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      //   child: SizedBox(
+                      //     height: 120,
+                      //     child: ListView.separated(
+                      //       shrinkWrap: true,
+                      //       physics: const AlwaysScrollableScrollPhysics(),
+                      //       scrollDirection: Axis.horizontal,
+                      //       itemCount: 2,
+                      //       itemBuilder: (context, index) {
+                      //         return const Card2(
+                      //           heading: 'Organization Name',
+                      //           subHeading: 'Event Heading',
+                      //           imageUrl: 'lib/assets/images/image1.jpg',
+                      //         );
+                      //       },
+                      //       separatorBuilder: (context, index) {
+                      //         return const SizedBox(width: 10);
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
+                      const HomeStreamBuilder(
+                        collectionName: 'org events',
+                        queryLimit: 5,
+                        heading: 'event_name',
+                        subHeading: 'event_desc',
+                        noDataErrorText: 'events',
                       ),
                       const SizedBox(height: 20),
                       //Browse who can you help TODO:
-                      const HeadingSeeAll(
+                      HeadingSeeAll(
                         heading: 'Browse who can you help',
+                        onTap: () {
+                          Get.to(() => const HomeDisplayAllEvents());
+                        },
                       ),
                       const SizedBox(height: 10),
+
                       // check whether sized box or container TODO:
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: SizedBox(
-                          height: 120,
-                          child: ListView(
-                            shrinkWrap: true,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: const [
-                              // Cards
-                              Card2(
-                                heading: 'Looking for : Item Name',
-                                subHeading: 'Item category',
-                                imageUrl: 'lib/assets/images/image1.jpg',
-                              ),
-                              //dummy card
-                              SizedBox(width: 10),
-                              Card2(
-                                heading: 'Looking for : Item Name',
-                                subHeading: 'Item category',
-                                imageUrl: 'lib/assets/images/image1.jpg',
-                              ),
-                            ],
-                          ),
-                        ),
+                      const HomeStreamBuilder(
+                        collectionName: 'org events',
+                        queryLimit: 5,
+                        heading: 'event_name',
+                        subHeading: 'event_desc',
+                        noDataErrorText: 'recipients',
                       ),
                       const SizedBox(height: 20),
 
                       // Offers right now TODO:
-                      const HeadingSeeAll(
+                      HeadingSeeAll(
                         heading: 'Offers right now',
+                        onTap: () {
+                          Get.to(() => const HomeDisplayAllEvents());
+                        },
                       ),
                       const SizedBox(height: 10),
                       // check whether sized box or container TODO:
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: SizedBox(
-                          height: 120,
-                          child: ListView(
-                            shrinkWrap: true,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: const [
-                              // Cards
-                              Card2(
-                                heading: 'Shop Name',
-                                subHeading: 'Location (Address)',
-                                imageUrl: 'lib/assets/images/image1.jpg',
-                              ),
-                              //dummy card
-                              SizedBox(width: 10),
-                              Card2(
-                                heading: 'Shop Name',
-                                subHeading: 'Location (Address)',
-                                imageUrl: 'lib/assets/images/image1.jpg',
-                              ),
-                            ],
-                          ),
-                        ),
+                      const HomeStreamBuilder(
+                        collectionName: 'store offers',
+                        queryLimit: 5,
+                        heading: 'event_name',
+                        subHeading: 'event_desc',
+                        noDataErrorText: 'offers',
                       ),
                     ],
                   ),
                 ),
               ),
-              //Fund Raising events happening Now TODO:
             ],
           ),
         ),

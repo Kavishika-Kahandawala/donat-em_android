@@ -14,7 +14,8 @@ class HeadingSeeAll extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(heading),
-          GestureDetector(onTap: onTap, child: const Text('See all'))
+          GestureDetector(
+              onTap: onTap, child: const SizedBox(child: Text('See all')))
         ],
       ),
     );

@@ -1,3 +1,6 @@
+// Deprecated
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +20,6 @@ class HomeLoadEventsDetails extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
-              print(data['event_name']);
           return Text("Event Name: ${data['event_name']}");
         }
         return const Text("loading");
