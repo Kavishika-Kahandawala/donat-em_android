@@ -191,7 +191,7 @@ class _RegisterUIState extends State<RegisterUI> {
                         Text(
                           'Already have an account?',
                           style: GoogleFonts.poppins(
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 4),

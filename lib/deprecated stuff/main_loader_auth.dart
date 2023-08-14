@@ -1,3 +1,4 @@
+// deprecated
 import 'package:donatem/screens/main/navigation_bar.dart';
 import 'package:donatem/services/reg_or_log.dart';
 import 'package:flutter/material.dart';

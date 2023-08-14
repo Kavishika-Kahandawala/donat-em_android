@@ -1,5 +1,6 @@
 // import 'dart:convert';
 
+// https://autosuggest.search.hereapi.com/v1/autosuggest?at=6.93194,79.84778&lang=en&q=kadaw&limit=3&apiKey=1AO6iReaNI4Mxj8I0RO-NMUniTyNhfQS3dKV9wQMjIM
 // import 'package:donatem/screens/main/maps/here_json_format.dart';
 // import 'package:http/http.dart' as http;
 

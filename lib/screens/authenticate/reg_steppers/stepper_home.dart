@@ -30,6 +30,13 @@ class _StepperHomeState extends State<StepperHome> {
         (querySnapshot) {
       setState(() {
         currentStep = querySnapshot.get('reg_step') + 1;
+        if (currentStep==4) {
+          Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const RegStepLocation();
+          },
+        ));
+        }
         if (currentStep==5) {
           Navigator.push(context, MaterialPageRoute(
           builder: (context) {
@@ -60,9 +67,7 @@ class _StepperHomeState extends State<StepperHome> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getDocId();
-    print('uid>>>>>>>>>>>>>>>>'+uid);
     super.initState();
   }
 
@@ -109,9 +114,10 @@ class _StepperHomeState extends State<StepperHome> {
                       const RegStepDob(),
                     ] else if (currentStep == 3) ...[
                       const RegStepMobile(),
-                    ] else if (currentStep == 4) ...[
-                      const RegStepLocation(),
-                    ],
+                    ] 
+                    // else if (currentStep == 4) ...[
+                    //   const RegStepLocation(),
+                    // ],
                   ],
                 ),
               ),

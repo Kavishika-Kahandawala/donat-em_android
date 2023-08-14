@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/stepper_home.dart';
-import 'package:donatem/screens/main/navigation_bar.dart';
+import 'package:donatem/screens/authenticate/verifyEmail.dart';
 import 'package:donatem/shared/circular_loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,7 @@ class _StepRegAuthState extends State<StepRegAuth> {
   int status = 0;
 
   final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  
 
   //Firebase get data
   Future regIncomplete() async {
@@ -31,7 +32,7 @@ class _StepRegAuthState extends State<StepRegAuth> {
         } else {
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
-              return const HomeUI();
+              return const VerifyEmail();
             },
           ));
         }

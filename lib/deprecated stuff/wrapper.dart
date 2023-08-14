@@ -1,4 +1,5 @@
-import 'package:donatem/screens/authenticate/authentication.dart';
+//deprecated
+import 'package:donatem/deprecated%20stuff/authentication.dart';
 import 'package:flutter/material.dart';
 
 class Wrapper extends StatelessWidget {
@@ -12,4 +13,3 @@ class Wrapper extends StatelessWidget {
   }
 }
 
-//deprecated

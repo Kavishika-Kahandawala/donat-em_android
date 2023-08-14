@@ -1,5 +1,6 @@
 import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_intro.dart';
 import 'package:donatem/screens/main/org%20ui/view_org_avail_event.dart';
+import 'package:donatem/screens/main/rec%20ui/edit%20preferences/edit_rec_pref.dart';
 import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_notice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,7 @@ class _RecMainUIState extends State<RecMainUI> {
                       ListTile(
                         title: const Text('Edit my preferences'),
                         onTap: () {
-                          Get.to(() => const StartOrgEventInto());
+                          Get.to(() => const EditRecPref());
                         },
                       ),
                       ListTile(

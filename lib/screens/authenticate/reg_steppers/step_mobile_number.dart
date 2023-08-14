@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/authenticate/reg_steppers/stepper_home.dart';
+import 'package:donatem/screens/authenticate/reg_steppers/otp_phone.dart';
 import 'package:donatem/shared/inputButton_1.dart';
-import 'package:donatem/shared/inputTextArea_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class RegStepMobile extends StatefulWidget {
   const RegStepMobile({super.key});
@@ -13,39 +13,62 @@ class RegStepMobile extends StatefulWidget {
 }
 
 class _RegStepMobileState extends State<RegStepMobile> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   //controllers
-  final fnameController = TextEditingController();
-  final lnameController = TextEditingController();
+  final phoneNumController = TextEditingController();
+  dynamic phoneNumberString;
 
   // Get current logged user id
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  // Push fname,lname to firestore
-  Future addUserRegData() async {
-    // show loading icon
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-    await FirebaseFirestore.instance.collection('users').doc(uid).set(
-      {
-        'mobile_number': fnameController.text.trim(),
-        'reg_step': 3,
+  Future verifyNumber() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneNumberString.toString(),
+      timeout: const Duration(seconds: 60),
+      verificationCompleted: (PhoneAuthCredential credential) {
       },
-      SetOptions(merge: true),
+      verificationFailed: (FirebaseAuthException e) {
+        if (e.code == 'invalid-phone-number') {
+          showErrorMsg('Error', 'The provided phone number is not valid.');
+        } else {
+          showErrorMsg('Error', e.message.toString());
+        }
+      },
+      codeSent: (verificationId, resendToken) {
+        Get.to(() => const OTPPhone(),arguments: [phoneNumberString.toString(),verificationId]);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+      },
     );
-    //pop loading circle
-    Navigator.pop(context);
-    {
-      await Navigator.push(context, MaterialPageRoute(
-        builder: (context) {
-          return const StepperHome();
-        },
-      ));
-    }
+  }
+
+  void showErrorMsg(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(
+              // 'It looks like ${emailController.text.trim()} isn\'t found in our database. Make sure correct E-mail has been entered'
+              message),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Close'))
+          ],
+        );
+      },
+    );
+  }
+
+  
+
+  @override
+  void dispose() {
+    phoneNumController.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,12 +76,48 @@ class _RegStepMobileState extends State<RegStepMobile> {
     return Column(
       children: [
         const SizedBox(height: 50),
-        InputTextArea1(
-            controller: fnameController,
-            hintText: 'Phone Number',
-            obscureText: false),
-        const SizedBox(height: 30),
-        InputButton1(onTap: addUserRegData, text: 'Submit'),
+        Form(
+          key: formKey,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: InternationalPhoneNumberInput(
+                onInputChanged: (PhoneNumber number) {
+                  phoneNumberString=number.phoneNumber;
+                  print(number.phoneNumber);
+                },
+                onInputValidated: (bool value) {
+                  print(value);
+                },
+                selectorConfig: const SelectorConfig(
+                  selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                ),
+                ignoreBlank: false,
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                selectorTextStyle: const TextStyle(color: Colors.black),
+                inputDecoration: const InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                  ),
+                ),
+                initialValue: PhoneNumber(isoCode: 'LK'),
+                textFieldController: phoneNumController,
+                formatInput: false,
+                keyboardType: const TextInputType.numberWithOptions(signed: true),
+                inputBorder: const OutlineInputBorder(),
+                onSaved: (PhoneNumber number) {
+                  print('On Saved: $number');
+                },
+              ),
+            ),
+          ),
+        ),
+        // InputTextArea1(
+        //     controller: fnameController,
+        //     hintText: 'Phone Number',
+        //     obscureText: false),
+        const SizedBox(height: 80),
+        InputButton1(onTap: verifyNumber, text: 'Submit'),
       ],
     );
   }

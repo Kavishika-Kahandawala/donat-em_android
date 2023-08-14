@@ -25,7 +25,7 @@ class _HomeUIState extends State<HomeUI> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const MainPageUI(),
-    const MapTestSearch(),
+    const ItemDetails(),
     const ItemDetails(),
     const UserProfileUI()
   ];

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/home/happening%20now/home_display_all_events.dart';
+import 'package:donatem/screens/main/home/events%20happening%20now/home_display_all_events.dart';
 import 'package:donatem/shared/home_streambuilder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,6 @@ class _MainPageUIState extends State<MainPageUI> {
         eventDocIds.add(result.id);
       }
       firstName = querySnapshot.docs[0].get('event_name');
-      print(eventDocIds);
     });
   }
 
@@ -81,25 +80,6 @@ class _MainPageUIState extends State<MainPageUI> {
       }
     });
   }
-
-  // Future testHello() async {
-  //   const String docId = "LHrm6sjFnU3xVt0U7T6h";
-  //   CollectionReference events =
-  //       FirebaseFirestore.instance.collection('users');
-  //   return FutureBuilder<DocumentSnapshot>(
-  //     future: events.doc(uid).get(),
-  //     builder: (context, snapshot) {
-  //       print('>>>>>>>> came here');
-  //       if (snapshot.connectionState == ConnectionState.done) {
-  //         Map<String, dynamic> data =
-  //             snapshot.data!.data() as Map<String, dynamic>;
-  //         print(data['event_name']);
-  //         // return Text("Event Name: ${data['event_name']}");
-  //       }
-  //       return const Text("loading");
-  //     },
-  //   );
-  // }
 
   @override
   void initState() {
@@ -164,9 +144,6 @@ class _MainPageUIState extends State<MainPageUI> {
                 child: ListTileTheme(
                   child: ListView(
                     children: [
-                      //   ListView.builder(itemCount: 3,itemBuilder:(context, index) {
-
-                      // },),
                       HeadingSeeAll(
                         heading: 'Fundraising events happening now',
                         onTap: () {
@@ -174,29 +151,7 @@ class _MainPageUIState extends State<MainPageUI> {
                         },
                       ),
                       const SizedBox(height: 10),
-                      // check whether sized box or container TODO:
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      //   child: SizedBox(
-                      //     height: 120,
-                      //     child: ListView.separated(
-                      //       shrinkWrap: true,
-                      //       physics: const AlwaysScrollableScrollPhysics(),
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemCount: 2,
-                      //       itemBuilder: (context, index) {
-                      //         return const Card2(
-                      //           heading: 'Organization Name',
-                      //           subHeading: 'Event Heading',
-                      //           imageUrl: 'lib/assets/images/image1.jpg',
-                      //         );
-                      //       },
-                      //       separatorBuilder: (context, index) {
-                      //         return const SizedBox(width: 10);
-                      //       },
-                      //     ),
-                      //   ),
-                      // ),
+
                       const HomeStreamBuilder(
                         collectionName: 'org events',
                         queryLimit: 5,
