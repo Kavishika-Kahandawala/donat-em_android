@@ -52,7 +52,7 @@ class _StartOrgEventDescState extends State<StartOrgEventDesc> {
           'uid': uid,
           // Only For 'status' is like this as no category section to load. 
           //Later this should be 'status' = 0 (There's no status 2 in this process (User friendliness)).
-          'status': 1,
+          'status': 2,
         },
       );
     });
@@ -124,6 +124,5 @@ class _StartOrgEventDescState extends State<StartOrgEventDesc> {
         ),
       ),
     );
-    ;
   }
 }

@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/org%20reg/org_reg_photo_upload.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_thanks.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_thanks.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
+import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../shared/inputButton_1.dart';
 
-class OrgRegPhotoNotice extends StatelessWidget {
-  const OrgRegPhotoNotice({super.key});
+class StartOrgEventPhotoNotice extends StatelessWidget {
+  const StartOrgEventPhotoNotice({super.key});
 
   void onTap() async {
     print(Get.arguments[0]);
@@ -19,15 +19,16 @@ class OrgRegPhotoNotice extends StatelessWidget {
   // skip button
   void skip() async {
     await FirebaseFirestore.instance
-        .collection('organizations')
+        .collection('org events')
         .doc(Get.arguments[0].toString())
         .set(
       {
-        'organization_banner': 'default',
+        'event_banner': 'default',
+        'status': 1,
       },
       SetOptions(merge: true),
     );
-    await Get.to(() => const OrgRegThanks(), arguments: [Get.arguments[0].toString()]);
+    await Get.to(() => const StartOrgEventThanks(), arguments: [Get.arguments[0].toString()]);
   }
 
   
@@ -53,7 +54,7 @@ class OrgRegPhotoNotice extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    AppAgreementText.orgRegPhotoNotice,
+                    AppAgreementText.startOrgEventPhotoNotice,
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,

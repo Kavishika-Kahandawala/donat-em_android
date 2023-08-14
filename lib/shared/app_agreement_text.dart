@@ -22,6 +22,8 @@ abstract class AppAgreementText {
 
   static const String orgRegPhotoNotice =
       'A photo is not required, but gives your organization more credibility. Choose a photo that best represents your organization.';
+  static const String startOrgEventPhotoNotice =
+      'A photo is not required, but gives your event more credibility. Choose a photo that best represents your event.';
   static const String recRegNotice =
       '1. As a recipient you must agree to the Donat\'em recipient policies as well.\n'
       '2. Your identity is important to us, thus we will collect your some personal information via photos (ex: Nic card photos) in the next screens\n'

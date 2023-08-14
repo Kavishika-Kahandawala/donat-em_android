@@ -97,12 +97,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
   Widget build(BuildContext context) => isEmailVerified
       ? const HomeUI()
       : Scaffold(
-        appBar: AppBar(
-        title: const Text('Home'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple.shade300,
-        elevation:0.5,
-      ),
           backgroundColor: Colors.deepPurple[200],
           body: SafeArea(
             child: Center(
@@ -112,19 +106,20 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 50),
+                      // const SizedBox(height: 50),
                       Text(
                         'Verify Your Email',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 30,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       Lottie.asset('lib/assets/icons/email_verify.json',
+                      height: 200,
                           repeat: true),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       Text(
                         'Check your email for a link to verify your account. If you don\'t see it, check your spam folder.',
                         textAlign: TextAlign.center,
@@ -135,7 +130,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       const SizedBox(height: 20),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(150, 50),
+                          minimumSize: const Size(200, 50),
                           backgroundColor: Colors.deepPurple,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
@@ -152,10 +147,27 @@ class _VerifyEmailState extends State<VerifyEmail> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      InputButton1(onTap: (){
-                        FirebaseAuth.instance.signOut();
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(200, 50),
+                          backgroundColor: Colors.deepPurple.shade300,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: (){
+                          FirebaseAuth.instance.signOut();
                         Get.to(() => const AuthService());
-                      }, text: 'Cancel')
+                        },
+                        icon: const Icon(LineIcons.envelope),
+                        label: Text(
+                          'Cancel',
+                          style: GoogleFonts.poppins(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

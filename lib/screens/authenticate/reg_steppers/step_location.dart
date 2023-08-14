@@ -43,7 +43,9 @@ class _RegStepLocationState extends State<RegStepLocation> {
         });
     await FirebaseFirestore.instance.collection('users').doc(uid).set(
       {
-        'first_name': '',
+        'user_lng': locationLng,
+        'user_lat': locationLat,
+        'user_location_name': locationController.text.trim(),
         'reg_step': 4,
       },
       SetOptions(merge: true),
@@ -93,10 +95,10 @@ class _RegStepLocationState extends State<RegStepLocation> {
     lngList.clear();
     latList.clear();
     final response = await http.get(Uri.parse(
-        'https://autosuggest.search.hereapi.com/v1/autosuggest?at=6.93194,79.84778&lang=en&q=$location&limit=3&apiKey=1AO6iReaNI4Mxj8I0RO-NMUniTyNhfQS3dKV9wQMjIM'));
+        'https://autosuggest.search.hereapi.com/v1/autosuggest?at=6.93194,79.84778&lang=en&q=$location&limit=4&apiKey=1AO6iReaNI4Mxj8I0RO-NMUniTyNhfQS3dKV9wQMjIM'));
     var data = jsonDecode(response.body);
-
-    if (response.statusCode == 200) {
+    try {
+      if (response.statusCode == 200) {
       HereLoc hereRestLocation = HereLoc.fromJson(data);
       for (Item item in hereRestLocation.items) {
         cityNameList.add(item.title);
@@ -108,6 +110,9 @@ class _RegStepLocationState extends State<RegStepLocation> {
     } else {
       return cityNameList;
     }
+    } catch (e) {
+      return cityNameList;
+    }
   }
 
   void insertListToStream(List<String> dataList) {
@@ -117,6 +122,7 @@ class _RegStepLocationState extends State<RegStepLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -173,14 +179,14 @@ class _RegStepLocationState extends State<RegStepLocation> {
                 stream: _listStreamController.stream,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
+                    return const Center(
+                      child: Text('Error loading data'),
                     );
                   }
                   if (!snapshot.hasData) {
                     debugPrint('no data');
                     return Lottie.asset(
-                      'lib/assets/icons/place.json', // Path to your animation JSON file
+                      'lib/assets/icons/location.json', // Path to your animation JSON file
                       height: 200,
                       width: 200,
                     );
@@ -202,7 +208,10 @@ class _RegStepLocationState extends State<RegStepLocation> {
                                 onTap: () {
                                   locationLng = lngList[index];
                                   locationLat = latList[index];
-                                  print(locationLng);
+                                  setState(() {
+                                    locationController.text = items[index];
+                                    insertListToStream([]);
+                                  });
                                 },
                               ),
                               Divider(color: Colors.grey.shade500)
@@ -218,10 +227,7 @@ class _RegStepLocationState extends State<RegStepLocation> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: InputButton1(
-                  onTap: () {
-                    print('tapped');
-                    print('>>>>' + cityNameList.toString());
-                  },
+                  onTap: addUserRegData,
                   text: 'Submit'),
             ),
                 SizedBox(height: MediaQuery.of(context).size.width * 0.50),
