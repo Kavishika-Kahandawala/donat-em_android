@@ -21,6 +21,7 @@ class RecRegPhotoUpload extends StatefulWidget {
 }
 
 class _RecRegPhotoUploadState extends State<RecRegPhotoUpload> {
+
   XFile? _pickedFile;
   CroppedFile? _croppedFile;
 
@@ -53,14 +54,14 @@ class _RecRegPhotoUploadState extends State<RecRegPhotoUpload> {
         .doc(uid)
         .set(
       {
-        'doc_img_' + Get.arguments[0]: urlDownload,
+        'doc_img_' + Get.arguments[0].toString(): urlDownload,
       },
       SetOptions(merge: true),
     );
 
     await FirebaseFirestore.instance.collection('users').doc(uid).set(
       {
-        'rec_reg_identity_photo_step': int.parse(Get.arguments[0]),
+        'rec_reg_identity_photo_step': int.parse(Get.arguments[0].toString()),
       },
       SetOptions(merge: true),
     );
@@ -75,6 +76,12 @@ class _RecRegPhotoUploadState extends State<RecRegPhotoUpload> {
   //Go next
   void next() {
     Get.to(() => const RecRegIdentityPhotoAuth());
+  }
+
+  @override
+  void initState() {
+    Get.arguments[0].toString();
+    super.initState();
   }
 
   Widget _imageCardUpload() {
@@ -115,7 +122,7 @@ class _RecRegPhotoUploadState extends State<RecRegPhotoUpload> {
                 percent: progress,
                 progressColor: Colors.deepPurple.shade300,
                 backgroundColor: Colors.deepPurple.shade100,
-                animation: true,
+                // animation: true,
                 animationDuration: 1000,
                 lineHeight: 25.0,
                 center: Text('${(progress * 100).toStringAsFixed(2)} % '),

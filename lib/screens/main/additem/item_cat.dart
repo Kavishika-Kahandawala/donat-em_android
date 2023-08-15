@@ -1,4 +1,9 @@
-import 'package:donatem/screens/main/additem/cat_grids/grid_1.dart';
+import 'package:donatem/screens/main/additem/cat_grids/clothing_and_accessories.dart';
+import 'package:donatem/screens/main/additem/cat_grids/electronics_and_appliances.dart';
+import 'package:donatem/screens/main/additem/cat_grids/household_items.dart';
+import 'package:donatem/screens/main/additem/cat_grids/other.dart';
+import 'package:donatem/screens/main/additem/cat_grids/stationeries.dart';
+import 'package:donatem/screens/main/additem/cat_grids/toys_and_games.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,16 +66,12 @@ class _ItemCategoryState extends State<ItemCategory> {
   // var data = Get.arguments;
 
   late final List<Widget> _widgetOptions = <Widget>[
-    CatGrid1(itemDocId: Get.arguments[0]),
-    Text(
-      'Index 1: Business',
-    ),
-    Text(
-      'Index 2: School',
-    ),
-    Text(
-      'Index 2: School',
-    ),
+    ClothingAndAccessories(itemDocId: Get.arguments[0]),
+    HouseholdItems(itemDocId: Get.arguments[0]),
+    ElectronicsAndAppliances(itemDocId: Get.arguments[0]),
+    Stationeries(itemDocId: Get.arguments[0]),
+    ToysAndGames(itemDocId: Get.arguments[0]),
+    Other(itemDocId: Get.arguments[0]),
   ];
 
   void _onItemTapped(int index) {
@@ -82,8 +83,15 @@ class _ItemCategoryState extends State<ItemCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Categories'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.deepPurple.shade300,
+        elevation:0.0,
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
+        
         child: Row(
           children: [
             Expanded(
@@ -100,7 +108,7 @@ class _ItemCategoryState extends State<ItemCategory> {
                     padding: EdgeInsets.zero,
                     children: [
                       ListTile(
-                        title: const Text('Clothes'),
+                        title: const Text('Clothing and Accessories'),
                         selected: _selectedIndex == 0,
                         onTap: () {
                           _onItemTapped(0);
@@ -108,7 +116,7 @@ class _ItemCategoryState extends State<ItemCategory> {
                       ),
                       ListTile(
                         // selectedTileColor: Colors.amber,
-                        title: const Text('Stationary'),
+                        title: const Text('Household Accessories'),
                         selected: _selectedIndex == 1,
                         onTap: () {
                           _onItemTapped(1);
@@ -116,7 +124,7 @@ class _ItemCategoryState extends State<ItemCategory> {
                       ),
                       ListTile(
                         // selectedTileColor: Colors.amber,
-                        title: const Text('Stationary'),
+                        title: const Text('Electronics and Appliances'),
                         selected: _selectedIndex == 2,
                         onTap: () {
                           _onItemTapped(2);
@@ -124,10 +132,26 @@ class _ItemCategoryState extends State<ItemCategory> {
                       ),
                       ListTile(
                         // selectedTileColor: Colors.amber,
-                        title: const Text('Stationary'),
+                        title: const Text('Stationeries'),
                         selected: _selectedIndex == 3,
                         onTap: () {
                           _onItemTapped(3);
+                        },
+                      ),
+                      ListTile(
+                        // selectedTileColor: Colors.amber,
+                        title: const Text('Toys and Games'),
+                        selected: _selectedIndex == 4,
+                        onTap: () {
+                          _onItemTapped(4);
+                        },
+                      ),
+                      ListTile(
+                        // selectedTileColor: Colors.amber,
+                        title: const Text('Other'),
+                        selected: _selectedIndex == 5,
+                        onTap: () {
+                          _onItemTapped(5);
                         },
                       ),
                     ],

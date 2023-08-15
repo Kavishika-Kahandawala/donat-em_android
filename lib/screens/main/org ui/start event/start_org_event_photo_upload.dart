@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_thanks.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_cat_select.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -53,7 +53,6 @@ class _StartOrgEventPhotoUploadState extends State<StartOrgEventPhotoUpload> {
         .set(
       {
         'event_banner': urlDownload,
-        'status': 1,
       },
       SetOptions(merge: true),
     );
@@ -68,7 +67,7 @@ class _StartOrgEventPhotoUploadState extends State<StartOrgEventPhotoUpload> {
 
   //Go next
   void next() {
-    Get.to(() => const StartOrgEventThanks(),
+    Get.to(() => const StartOrgEventCatSelect(),
         arguments: [Get.arguments[0].toString()]);
   }
 

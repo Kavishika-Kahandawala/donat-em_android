@@ -47,9 +47,9 @@ class _OTPPhoneState extends State<OTPPhone> {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: Get.arguments[1].toString(), smsCode: otpSmsCode);
       FirebaseAuth.instance.currentUser?.updatePhoneNumber(credential);
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       // print('Error in verify otp');
-      showErrorMsg('Error', 'Something went wrong');
+      showErrorMsg('Error', e.message.toString());
     }
   }
 
@@ -67,8 +67,8 @@ class _OTPPhoneState extends State<OTPPhone> {
           errorText = 'OTP Code is incorrect';
         });
       }
-    } catch (e) {
-      showErrorMsg('Error', 'Something went wrong');
+    } on FirebaseAuthException catch (e) {
+      showErrorMsg('Error', e.message.toString());
     }
   }
 
@@ -158,9 +158,9 @@ class _OTPPhoneState extends State<OTPPhone> {
                       listenForMultipleSmsOnAndroid: true,
                       defaultPinTheme: defaultPinTheme,
                       separatorBuilder: (index) => const SizedBox(width: 8),
-                      validator: (value) {
-                        return validateBit == '1' ? null : 'Pin is incorrect';
-                      },
+                      // validator: (value) {
+                      //   return validateBit == '1' ? null : 'Pin is incorrect';
+                      // },
                       onClipboardFound: (value) {
                         debugPrint('onClipboardFound: $value');
                         pinController.setText(value);

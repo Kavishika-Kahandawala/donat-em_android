@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_location.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,68 +8,50 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class EditRecPref extends StatefulWidget {
-  const EditRecPref({super.key});
+class StartOrgEventCatSelect extends StatefulWidget {
+  const StartOrgEventCatSelect({super.key});
 
   @override
-  State<EditRecPref> createState() => _EditRecPrefState();
+  State<StartOrgEventCatSelect> createState() => _StartOrgEventCatSelectState();
 }
-
-class _EditRecPrefState extends State<EditRecPref> {
+class _StartOrgEventCatSelectState extends State<StartOrgEventCatSelect> {
   List<Object?> selectedItems = [];
-  List<Object?> initItems = [];
 
   final List<MultiSelectItem<String>> _items = [
-    MultiSelectItem<String>(
-        'Clothing and Accessories', 'Clothing and Accessories'),
+    MultiSelectItem<String>('Clothing and Accessories', 'Clothing and Accessories'),
     MultiSelectItem<String>('Household Accessories', 'Household Accessories'),
-    MultiSelectItem<String>(
-        'Electronics and Appliances', 'Electronics and Appliances'),
+    MultiSelectItem<String>('Electronics and Appliances', 'Electronics and Appliances'),
     MultiSelectItem<String>('Stationeries', 'Stationeries'),
     MultiSelectItem<String>('Toys and Games', 'Toys and Games'),
+    MultiSelectItem<String>('Other', 'Other'),
   ];
+
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
-  String catError = '';
+  String catError='';
 
   Future setCats() async {
     if (selectedItems.isNotEmpty) {
       setState(() {
-        catError = '';
+        catError='';
       });
-      await FirebaseFirestore.instance.collection('users').doc(uid).set(
-        {
-          'rec_cats': selectedItems,
-        },
-        SetOptions(merge: true),
-      );
+      await FirebaseFirestore.instance
+        .collection('org events')
+        .doc(Get.arguments[0].toString())
+        .set(
       {
-        Get.back();
-      }
-    } else {
+        'event_cats':selectedItems,
+      },
+      SetOptions(merge: true),
+    );
+    await Get.to(() => const StartOrgEventLocation(),arguments: [Get.arguments[0].toString()]);
+    }else{
       setState(() {
-        catError = 'Please select at least one category';
+        catError='Please select at least one category';
       });
     }
   }
 
-  Future initValues() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .get()
-        .then((querySnapshot) async {
-          setState(() {
-            selectedItems = querySnapshot.get('rec_cats');
-            initItems = querySnapshot.get('rec_cats');
-          });
-    });
-  }
-
-  @override
-  void initState() {
-    initValues();
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +79,7 @@ class _EditRecPrefState extends State<EditRecPref> {
               ),
               const SizedBox(height: 20),
               Text(
-                'Select categories which you are interested in for donations',
+                'Selecting categories make it easier for users to know about the event',
                 style: GoogleFonts.poppins(
                   // fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -111,7 +94,6 @@ class _EditRecPrefState extends State<EditRecPref> {
                     GoogleFonts.poppins(color: Colors.white),
                 // backgroundColor: Colors.deepPurple.shade100,
                 backgroundColor: Colors.white,
-                initialValue: initItems,
                 initialChildSize: 0.4,
                 listType: MultiSelectListType.CHIP,
                 searchable: true,
@@ -143,7 +125,7 @@ class _EditRecPrefState extends State<EditRecPref> {
                   setState(
                     () {
                       selectedItems = values;
-                      catError = '';
+                      catError='';
                     },
                   );
                 },
@@ -160,6 +142,7 @@ class _EditRecPrefState extends State<EditRecPref> {
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
+                        
                         children: [
                           const SizedBox(height: 20),
                           Text(
@@ -171,10 +154,10 @@ class _EditRecPrefState extends State<EditRecPref> {
                     )
                   : Container(),
 
-              const SizedBox(height: 50),
-              Text(catError, style: const TextStyle(color: Colors.red)),
-              const SizedBox(height: 20),
-              InputButton1(onTap: setCats, text: 'Next')
+                  const SizedBox(height: 50),
+                  Text(catError, style: const TextStyle(color: Colors.red)),
+                  const SizedBox(height: 20),
+                  InputButton1(onTap: setCats, text: 'Next')
             ],
           ),
         ),

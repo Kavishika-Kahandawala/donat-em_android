@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/rec%20reg/rec_reg_cat_select.dart';
 import 'package:donatem/screens/main/rec%20reg/rec_reg_photo_upload.dart';
 import 'package:donatem/screens/main/rec%20reg/rec_reg_thanks.dart';
 import 'package:donatem/shared/circular_loading.dart';
@@ -37,8 +38,9 @@ class _RecRegIdentityPhotoAuthState extends State<RecRegIdentityPhotoAuth> {
             newImgNum.toString(), keyword.toString()
           ]);
         } else {
-          finalizeData();
-          Get.to(() => const RecRegThanks());
+          Get.to(() => const RecRegCatSelect());
+          // finalizeData();
+          // Get.to(() => const RecRegThanks());
         }
       },
       onError: (e) {
@@ -47,14 +49,14 @@ class _RecRegIdentityPhotoAuthState extends State<RecRegIdentityPhotoAuth> {
     );
     // return status;
   }
-  Future finalizeData()async {
-    await FirebaseFirestore.instance.collection('users').doc(uid).set(
-      {
-        'receiver_reg_status': 2,
-      },
-      SetOptions(merge: true),
-    );
-  }
+  // Future finalizeData()async {
+  //   await FirebaseFirestore.instance.collection('users').doc(uid).set(
+  //     {
+  //       'receiver_reg_status': 2,
+  //     },
+  //     SetOptions(merge: true),
+  //   );
+  // }
 
   Future updateFirestore() async {
     await FirebaseFirestore.instance.collection('users').doc(uid).set(

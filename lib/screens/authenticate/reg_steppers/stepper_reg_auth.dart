@@ -23,7 +23,7 @@ class _StepRegAuthState extends State<StepRegAuth> {
   Future regIncomplete() async {
     await FirebaseFirestore.instance.collection('users').doc(uid).get().then(
       (querySnapshot) {
-        if (querySnapshot.get('reg_step') < 4) {
+        if (querySnapshot.get('reg_step') < 5) {
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
               return const StepperHome();

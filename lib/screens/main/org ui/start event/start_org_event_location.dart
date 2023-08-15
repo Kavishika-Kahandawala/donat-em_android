@@ -1,26 +1,25 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/authenticate/reg_steppers/stepper_home.dart';
 import 'package:donatem/screens/main/maps/here_json_format.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_thanks.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:donatem/shared/inputTextArea_3.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:lottie/lottie.dart';
-import 'package:progress_bar_steppers/steppers.dart';
 
-class RegStepLocation extends StatefulWidget {
-  const RegStepLocation({super.key});
+class StartOrgEventLocation extends StatefulWidget {
+  const StartOrgEventLocation({super.key});
 
   @override
-  State<RegStepLocation> createState() => _RegStepLocationState();
+  State<StartOrgEventLocation> createState() => _StartOrgEventLocationState();
 }
 
-class _RegStepLocationState extends State<RegStepLocation> {
+class _StartOrgEventLocationState extends State<StartOrgEventLocation> {
   //controllers
   final locationController = TextEditingController();
 
@@ -38,43 +37,36 @@ class _RegStepLocationState extends State<RegStepLocation> {
               child: CircularProgressIndicator(),
             );
           });
-      await FirebaseFirestore.instance.collection('users').doc(uid).set(
+
+      await FirebaseFirestore.instance .collection('org events')
+        .doc(_key)
+        .set(
         {
-          'user_lng': locationLng,
-          'user_lat': locationLat,
-          'user_location_name': locationController.text.trim(),
-          'reg_step': 5,
+          'event_lng': locationLng,
+          'event_lat': locationLat,
+          'event_location_name': locationController.text.trim(),
+          'status': 1,
         },
         SetOptions(merge: true),
       );
       //pop loading circle
       Navigator.pop(context);
       {
-        Get.to(() => const StepperHome());
+        Get.to(() => const StartOrgEventThanks(), arguments: [_key.toString()]);
       }
     } else {
       showErrorMsg('Error', 'Please select a location');
     }
   }
 
-  final stepsData = [
-    StepperData(
-      label: 'Step 1',
-    ),
-    StepperData(
-      label: 'Step 2',
-    ),
-    StepperData(
-      label: 'Step 3',
-    ),
-    StepperData(
-      label: 'Step 4',
-    ),
-  ];
+  String _key='';
 
-  //progress bar stuff
-  int currentStep = 5;
-  int maxSteps = 5;
+  @override
+  void initState() {
+    _key=Get.arguments[0].toString();
+    super.initState();
+  }
+ 
 
   void showErrorMsg(String title, String message) {
     showDialog(
@@ -143,48 +135,60 @@ class _RegStepLocationState extends State<RegStepLocation> {
   }
 
   @override
+  void dispose() {
+    _listStreamController.close();
+    locationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // title: const Text('Home'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.deepPurple.shade300,
+        elevation:0.0,
+      ),
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            LinearProgressBar(
-              maxSteps: maxSteps,
-              progressType: LinearProgressBar.progressTypeLinear,
-              currentStep: currentStep,
-              progressColor: Colors.deepPurple,
-              backgroundColor: Colors.white,
-              valueColor:
-                  AlwaysStoppedAnimation<Color>(Colors.deepPurple.shade400),
-              semanticsLabel: "Label",
-              semanticsValue: "Value",
-              // minHeight: 10,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Steppers(
-              direction: StepperDirection.horizontal,
-              labels: stepsData,
-              currentStep: currentStep,
-              stepBarStyle: StepperStyle(
-                activeColor: Colors.deepPurple.shade400,
-                maxLineLabel: 2,
-                inactiveColor: Colors.deepPurple.shade100,
-              ),
-            ),
-            const SizedBox(height: 50),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+              // const SizedBox(height: 20),
+            // const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Select Location',
+                      style: GoogleFonts.poppins(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Selecting location make it easier for users find the event',
+                    style: GoogleFonts.poppins(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   InputTextArea3(
                     controller: locationController,
-                    hintText: 'Enter your city name',
+                    hintText: 'Enter city name of where event holds',
                     obscureText: false,
                     onTap: (text) {
                       if (locationController.text.trim().isNotEmpty) {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_thanks.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_photo_notice.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:donatem/shared/inputTextArea_1.dart';
 import 'package:donatem/shared/inputTextArea_2.dart';
@@ -61,7 +61,7 @@ class _StartOrgEventDescState extends State<StartOrgEventDesc> {
     Navigator.pop(context);
     {
       // Select Categories <<<<<<<<<<<<<< NOT THIS >>>>>>>>>>> TODO:
-      Get.to(() => const StartOrgEventThanks(),
+      Get.to(() => const StartOrgEventPhotoNotice(),
           arguments: [returnDocID.id.toString()]);
     }
   }

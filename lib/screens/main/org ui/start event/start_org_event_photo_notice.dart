@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_photo_upload.dart';
-import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_thanks.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_cat_select.dart';
+import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_photo_upload.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class StartOrgEventPhotoNotice extends StatelessWidget {
 
   void onTap() async {
     print(Get.arguments[0]);
-    Get.to(() => const OrgRegPhotoUpload(), arguments: [Get.arguments[0].toString()]);
+    Get.to(() => const StartOrgEventPhotoUpload(), arguments: [Get.arguments[0].toString()]);
   }
 
   // skip button
@@ -24,11 +24,10 @@ class StartOrgEventPhotoNotice extends StatelessWidget {
         .set(
       {
         'event_banner': 'default',
-        'status': 1,
       },
       SetOptions(merge: true),
     );
-    await Get.to(() => const StartOrgEventThanks(), arguments: [Get.arguments[0].toString()]);
+    await Get.to(() => const StartOrgEventCatSelect(), arguments: [Get.arguments[0].toString()]);
   }
 
   

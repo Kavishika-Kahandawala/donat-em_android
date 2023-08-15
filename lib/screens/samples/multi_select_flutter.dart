@@ -1,4 +1,4 @@
-import 'package:multi_select_item/multi_select_item.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:flutter/material.dart';
 
 class MultiSelectListDemo extends StatefulWidget {

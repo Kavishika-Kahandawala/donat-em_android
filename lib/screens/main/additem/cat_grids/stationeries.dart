@@ -7,18 +7,20 @@ import 'package:get/get.dart';
 import '../../../../shared/circle_avatar_1.dart';
 import '../item_photo_verify_notice.dart';
 
-class CatGrid1 extends StatefulWidget {
+class Stationeries extends StatefulWidget {
   // Item Id
   final String itemDocId;
-  const CatGrid1({super.key, required this.itemDocId});
+  const Stationeries({super.key, required this.itemDocId});
 
   @override
-  State<CatGrid1> createState() => _CatGrid1State();
+  State<Stationeries> createState() => _StationeriesState();
 }
 
-class _CatGrid1State extends State<CatGrid1> {
+class _StationeriesState extends State<Stationeries> {
+
+  String categoryName = "Stationeries";
   //init category
-  Future initCat(String categoryName) async {
+  Future initCat(String subCategoryName) async {
     // show loading icon
     showDialog(
         context: context,
@@ -33,6 +35,7 @@ class _CatGrid1State extends State<CatGrid1> {
         .set(
       {
         'item_category': categoryName,
+        'item_sub_category': subCategoryName,
         'image_count':0,
       },
       SetOptions(merge: true),
@@ -40,15 +43,12 @@ class _CatGrid1State extends State<CatGrid1> {
     //pop loading circle
     Navigator.pop(context);
     {
-      // await Navigator.push(context, MaterialPageRoute(
-      //   builder: (context) {
-      //     return const ItemThanks();
-      //   },
-      // ));
       Get.to(()=> const ItemPhotoVerifyNotice(), arguments: [Get.arguments[0].toString()]);
     }
 
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -58,30 +58,45 @@ class _CatGrid1State extends State<CatGrid1> {
                 // primary: false,
                 children:  [
                   CircleAvatar1(
-                    onTap: () => initCat("Shirts"),
-                      heading: 'Shirts',
+                    onTap: () => initCat("Notebooks"),
+                      heading: 'Notebooks',
                       imgUrl:
                           'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
                   CircleAvatar1(
-                    onTap: () => initCat("T-Shirts"),
-                      heading: 'T-Shirts',
+                    onTap: () => initCat("Calculators"),
+                      heading: 'Calculators',
                       imgUrl:
                           'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
                   CircleAvatar1(
-                    onTap: () => initCat("Shirts"),
-                      heading: 'Sample heading ',
+                    onTap: () => initCat("Staplers"),
+                      heading: 'Staplers',
                       imgUrl:
                           'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
                   CircleAvatar1(
-                    onTap: () => initCat("Shirts"),
-                      heading: 'Sample heading ',
+                    onTap: () => initCat("Art Supplies"),
+                      heading: 'Art Supplies',
                       imgUrl:
                           'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
                   CircleAvatar1(
-                    onTap: () => initCat("Shirts"),
-                      heading: 'Sample heading ',
+                    onTap: () => initCat("Novels"),
+                      heading: 'Novels',
                       imgUrl:
-                          'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg')
+                          'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
+                  CircleAvatar1(
+                    onTap: () => initCat("Magazines"),
+                      heading: 'Magazines',
+                      imgUrl:
+                          'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
+                  CircleAvatar1(
+                    onTap: () => initCat("Journals"),
+                      heading: 'Journals',
+                      imgUrl:
+                          'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
+                  CircleAvatar1(
+                    onTap: () => initCat("Other"),
+                      heading: 'Other',
+                      imgUrl:
+                          'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
                 ],
               );
   }
