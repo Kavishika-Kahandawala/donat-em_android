@@ -1,34 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/loyalty/loyalty.dart';
 import 'package:donatem/shared/card_3.dart';
+import 'package:donatem/shared/card_5.dart';
 import 'package:flutter/material.dart';
-import 'card_2.dart';
 
-class HomeStreamBuilder extends StatefulWidget {
+class HomeStreamBuilderRec extends StatefulWidget {
   final String collectionName;
   final int queryLimit;
   final String heading;
   final String subHeading;
   final String noDataErrorText;
+  final Function()? onTap;
 
-  const HomeStreamBuilder(
+  const HomeStreamBuilderRec(
       {super.key,
       required this.collectionName,
       required this.queryLimit,
       required this.heading,
       required this.subHeading,
-      required this.noDataErrorText});
+      required this.noDataErrorText,
+      this.onTap});
 
   @override
-  State<HomeStreamBuilder> createState() => _HomeStreamBuilderState();
+  State<HomeStreamBuilderRec> createState() => _HomeStreamBuilderRecState();
 }
 
-class _HomeStreamBuilderState extends State<HomeStreamBuilder> {
+class _HomeStreamBuilderRecState extends State<HomeStreamBuilderRec> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(widget.collectionName)
           .limit(widget.queryLimit)
+          .where('receiver_reg_status', isEqualTo: 1)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -68,12 +72,19 @@ class _HomeStreamBuilderState extends State<HomeStreamBuilder> {
               scrollDirection: Axis.horizontal,
               itemCount: userSnapshot.length,
               itemBuilder: (context, index) {
-                return Card2(
-                  heading: userSnapshot[index][widget.heading].toString(),
-                  subHeading: userSnapshot[index][widget.subHeading].toString(),
-                  imageUrl:
-                      'https://firebasestorage.googleapis.com/v0/b/donat-em-a9d65.appspot.com/o/Donation%20Items%2FItem%20Images%2F1690776484847d3IvSGciApYT32m35IKsoJp6JqF2?alt=media&token=030224a3-ee24-4ab5-b97c-8df9f5096a20',
+                return Card5(
+                  onTap: widget.onTap,
+                  heading: 'Interested in :',
+                  subHeading: userSnapshot[index][widget.subHeading],
+                  imageUrl: '',
                 );
+                // Card5(
+                //   onTap: widget.onTap,
+                //   heading: 'Interested in :',
+                //   subHeading: userSnapshot[index][widget.subHeading],
+                //   imageUrl:
+                //       '',
+                // );
               },
               separatorBuilder: (context, index) {
                 return const SizedBox(width: 10);

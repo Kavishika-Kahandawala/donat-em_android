@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/home/events%20happening%20now/home_display_all_events.dart';
+import 'package:donatem/shared/card_5.dart';
 import 'package:donatem/shared/home_streambuilder.dart';
+import 'package:donatem/shared/home_streambuilder_recs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,19 +42,19 @@ class _MainPageUIState extends State<MainPageUI> {
     });
   }
 
-  Future loadEventsDetails() async {
-    int docLimit = 5;
-    await FirebaseFirestore.instance
-        .collection('org events')
-        .limit(docLimit)
-        .get()
-        .then((querySnapshot) {
-      for (var result in querySnapshot.docs) {
-        eventDocIds.add(result.id);
-      }
-      firstName = querySnapshot.docs[0].get('event_name');
-    });
-  }
+  // Future loadEventsDetails() async {
+  //   int docLimit = 5;
+  //   await FirebaseFirestore.instance
+  //       .collection('org events')
+  //       .limit(docLimit)
+  //       .get()
+  //       .then((querySnapshot) {
+  //     for (var result in querySnapshot.docs) {
+  //       eventDocIds.add(result.id);
+  //     }
+  //     firstName = querySnapshot.docs[0].get('event_name');
+  //   });
+  // }
 
   void greetings() {
     final hour = TimeOfDay.now().hour;
@@ -69,29 +71,35 @@ class _MainPageUIState extends State<MainPageUI> {
   }
 
   //get  docIDs
-  Future getEventDocIds() async {
-    await FirebaseFirestore.instance
-        .collection('org events')
-        .where('status', isEqualTo: 1)
-        .get()
-        .then((querySnapshot) {
-      for (var result in querySnapshot.docs) {
-        eventDocIds.add(result.id);
-      }
-    });
-  }
+  // Future getEventDocIds() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('org events')
+  //       .where('status', isEqualTo: 1)
+  //       .get()
+  //       .then((querySnapshot) {
+  //     for (var result in querySnapshot.docs) {
+  //       eventDocIds.add(result.id);
+  //     }
+  //   });
+  // }
 
   @override
   void initState() {
     // testHello();
-    loadEventsDetails();
+    // loadEventsDetails();
     greetings();
-    getEventDocIds();
+    // getEventDocIds();
     loadUserInfo();
     super.initState();
   }
 
-  void replaceVoid() {}
+  @override
+  void dispose() {
+    eventDocIds.clear();
+    donateItemsDocIds.clear();
+    offerShopIds.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,14 +176,24 @@ class _MainPageUIState extends State<MainPageUI> {
                         },
                       ),
                       const SizedBox(height: 10),
-
+                      
                       // check whether sized box or container TODO:
-                      const HomeStreamBuilder(
-                        collectionName: 'org events',
-                        queryLimit: 5,
-                        heading: 'event_name',
-                        subHeading: 'event_desc',
-                        noDataErrorText: 'recipients',
+                      GestureDetector(
+                        onTap: () {
+                          debugPrint('HomeStreamBuilderRec Tapped');
+                          // Add your desired behavior here when the user taps on HomeStreamBuilderRec
+                        },
+                        child: HomeStreamBuilderRec(
+                          onTap: () {
+                            debugPrint(
+                                '>>>>>>>>>'); // This is the onTap behavior of HomeStreamBuilderRec
+                          },
+                          collectionName: 'users',
+                          queryLimit: 5,
+                          heading: 'users',
+                          subHeading: 'rec_cats',
+                          noDataErrorText: 'recipients',
+                        ),
                       ),
                       const SizedBox(height: 20),
 

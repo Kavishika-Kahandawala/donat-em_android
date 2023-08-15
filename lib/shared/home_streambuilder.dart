@@ -28,7 +28,7 @@ class _HomeStreamBuilderState extends State<HomeStreamBuilder> {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(widget.collectionName)
-          .limit(widget.queryLimit)
+          .limit(widget.queryLimit).where('status', isEqualTo: 1)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
