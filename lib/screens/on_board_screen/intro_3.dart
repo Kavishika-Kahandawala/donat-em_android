@@ -15,8 +15,8 @@ class Intro3 extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.network(
-                  'https://assets8.lottiefiles.com/packages/lf20_vas19ssm.json',),
+             Lottie.asset(
+                    'lib/assets/icons/price_tags.json',),
               Text(
                 'Grab special offers, discounts and many more by using Donat\'Em loyalty points',
                 textAlign: TextAlign.center,

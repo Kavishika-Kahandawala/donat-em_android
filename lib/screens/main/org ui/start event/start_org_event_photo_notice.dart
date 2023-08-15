@@ -45,7 +45,7 @@ class StartOrgEventPhotoNotice extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'Add a photo of your organization',
+                    'Add a photo for your event',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,

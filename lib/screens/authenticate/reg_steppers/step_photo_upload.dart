@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_thanks.dart';
+import 'package:donatem/screens/authenticate/reg_steppers/stepper_home.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,14 +13,14 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class StartOrgEventPhotoUpload extends StatefulWidget {
-  const StartOrgEventPhotoUpload({super.key});
+class RegStepPhotoUpload extends StatefulWidget {
+  const RegStepPhotoUpload({super.key});
 
   @override
-  State<StartOrgEventPhotoUpload> createState() => _StartOrgEventPhotoUploadState();
+  State<RegStepPhotoUpload> createState() => _RegStepPhotoUploadState();
 }
 
-class _StartOrgEventPhotoUploadState extends State<StartOrgEventPhotoUpload> {
+class _RegStepPhotoUploadState extends State<RegStepPhotoUpload> {
   XFile? _pickedFile;
   CroppedFile? _croppedFile;
 
@@ -30,7 +30,8 @@ class _StartOrgEventPhotoUploadState extends State<StartOrgEventPhotoUpload> {
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
   Future<void> _uploadImageFirebase() async {
-    final path = '/Organizations/Organization Events Images/${DateTime.now().millisecondsSinceEpoch.toString()}${Get.arguments[0].toString()}';
+    final path =
+        '/users/profile picture/${DateTime.now().millisecondsSinceEpoch.toString()}${uid.toString()}';
     final file;
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -47,13 +48,10 @@ class _StartOrgEventPhotoUploadState extends State<StartOrgEventPhotoUpload> {
 
     final urlDownload = await snapshot.ref.getDownloadURL();
 
-    await FirebaseFirestore.instance
-        .collection('org events')
-        .doc(Get.arguments[0].toString())
-        .set(
+    await FirebaseFirestore.instance.collection('users').doc(uid).set(
       {
-        'event_banner': urlDownload,
-        'status': 1,
+        'profile_picture': urlDownload,
+        'reg_step': 2,
       },
       SetOptions(merge: true),
     );
@@ -65,11 +63,9 @@ class _StartOrgEventPhotoUploadState extends State<StartOrgEventPhotoUpload> {
     });
   }
 
-
   //Go next
   void next() {
-    Get.to(() => const StartOrgEventThanks(),
-        arguments: [Get.arguments[0].toString()]);
+    Get.to(() => const StepperHome());
   }
 
   Widget _imageCardUpload() {

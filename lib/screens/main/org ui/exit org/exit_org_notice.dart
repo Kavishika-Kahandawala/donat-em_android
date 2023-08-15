@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/org%20reg/org_reg_desc.dart';
 import 'package:donatem/screens/main/org%20ui/exit%20org/exit_org_sorry_to_see_you_go.dart';
-import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_sorry_to_see_you_go.dart';
 import 'package:donatem/shared/app_agreement_text.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';

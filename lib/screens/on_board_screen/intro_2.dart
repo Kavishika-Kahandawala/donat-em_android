@@ -15,8 +15,8 @@ class Intro2 extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.network(
-                'https://lottie.host/e16188cf-b926-43d6-886b-7abfc8b4fde7/U9TT548Ulf.json',
+              Lottie.asset(
+                    'lib/assets/icons/man_givin_gift_to_child.json',
                 repeat: false,
               ),
               Text(

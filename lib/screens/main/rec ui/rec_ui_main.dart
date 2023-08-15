@@ -1,4 +1,3 @@
-import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_intro.dart';
 import 'package:donatem/screens/main/org%20ui/view_org_avail_event.dart';
 import 'package:donatem/screens/main/rec%20ui/edit%20preferences/edit_rec_pref.dart';
 import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_notice.dart';

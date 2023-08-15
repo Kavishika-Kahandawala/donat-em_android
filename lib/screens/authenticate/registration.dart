@@ -114,6 +114,7 @@ class _RegisterUIState extends State<RegisterUI> {
       'last_name': '',
       'email': email,
       'reg_step':0,
+      'loyalty_points':0.0,
       'receiver_reg_status':0,
       'org_reg_status':0,
 

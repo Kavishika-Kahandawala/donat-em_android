@@ -76,7 +76,7 @@ class _OTPPhoneState extends State<OTPPhone> {
     await FirebaseFirestore.instance.collection('users').doc(uid).set(
       {
         'mobile_number': Get.arguments[0].toString(),
-        'reg_step': 3,
+        'reg_step': 4,
       },
       SetOptions(merge: true),
     );

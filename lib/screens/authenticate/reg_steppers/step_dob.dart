@@ -69,8 +69,8 @@ class _RegStepDobState extends State<RegStepDob> {
     if (verifyUserInput()) {
       await FirebaseFirestore.instance.collection('users').doc(uid).set(
         {
-          'dob': DateFormat.yMMMEd().format(_dateTime),
-          'reg_step': 2,
+          'dob': _dateTime,
+          'reg_step': 3,
         },
         SetOptions(merge: true),
       );

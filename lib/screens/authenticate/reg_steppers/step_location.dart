@@ -46,7 +46,7 @@ class _RegStepLocationState extends State<RegStepLocation> {
         'user_lng': locationLng,
         'user_lat': locationLat,
         'user_location_name': locationController.text.trim(),
-        'reg_step': 4,
+        'reg_step': 5,
       },
       SetOptions(merge: true),
     );
@@ -73,8 +73,8 @@ class _RegStepLocationState extends State<RegStepLocation> {
   ];
 
   //progress bar stuff
-  int currentStep = 4;
-  int maxSteps = 4;
+  int currentStep = 5;
+  int maxSteps = 5;
 
   //new code
 
@@ -186,7 +186,7 @@ class _RegStepLocationState extends State<RegStepLocation> {
                   if (!snapshot.hasData) {
                     debugPrint('no data');
                     return Lottie.asset(
-                      'lib/assets/icons/location.json', // Path to your animation JSON file
+                      'lib/assets/icons/place.json', // Path to your animation JSON file
                       height: 200,
                       width: 200,
                     );

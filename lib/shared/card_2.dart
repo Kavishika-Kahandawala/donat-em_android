@@ -21,26 +21,41 @@ class Card2 extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           child: Ink(
+            // under a container
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: NetworkImage(imageUrl),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             width: MediaQuery.of(context).size.width * 0.80,
-            color: Colors.deepPurple[100],  
+            color: Colors.deepPurple[100],
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Image.asset(imageUrl, width: 40),
-                  Icon(LineIcons.byName('book')),
-                  const SizedBox(height: 10),
-                  
-                  // Heading
-                  Text(heading),
-                  const SizedBox(height: 10),
-              
-                  // Sub Heading
-                  Text(subHeading)
-                ],
-                      ),
+                  children: [
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //       image: NetworkImage(imageUrl),
+                    //       fit: BoxFit.cover,
+                    //     ),
+                    //   ),
+                    // ),
+                    // Image.network(imageUrl, width: 40),
+                    Icon(LineIcons.byName('book')),
+                    const SizedBox(height: 10),
+
+                    // Heading
+                    Text(heading),
+                    const SizedBox(height: 10),
+
+                    // Sub Heading
+                    Text(subHeading)
+                  ],
+                ),
               ),
             ),
           ),

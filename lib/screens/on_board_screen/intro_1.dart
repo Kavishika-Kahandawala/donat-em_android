@@ -17,8 +17,8 @@ class Intro1 extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Lottie.network(
-                    'https://assets6.lottiefiles.com/packages/lf20_1a8dx7zj.json',repeat: false),
+                Lottie.asset(
+                    'lib/assets/icons/girl_sitting_on_books.json',repeat: false),
                     Text(
                 'Have those stuff you no longer use?',
                 textAlign: TextAlign.center,

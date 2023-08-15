@@ -2,6 +2,7 @@ import 'package:donatem/screens/authenticate/reg_steppers/step_location.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/step_mobile_number.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/step_name.dart';
 import 'package:donatem/screens/authenticate/reg_steppers/step_dob.dart';
+import 'package:donatem/screens/authenticate/reg_steppers/step_photo_notice.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:linear_progress_bar/linear_progress_bar.dart';
@@ -20,7 +21,7 @@ class StepperHome extends StatefulWidget {
 class _StepperHomeState extends State<StepperHome> {
   //progress bar stuff
   int currentStep = 0;
-  int maxSteps = 4;
+  int maxSteps = 5;
   // var totalSteps = 0;
 
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -30,23 +31,23 @@ class _StepperHomeState extends State<StepperHome> {
         (querySnapshot) {
       setState(() {
         currentStep = querySnapshot.get('reg_step') + 1;
-        if (currentStep==4) {
+        if (currentStep == 5) {
           Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return const RegStepLocation();
-          },
-        ));
+            builder: (context) {
+              return const RegStepLocation();
+            },
+          ));
         }
-        if (currentStep==5) {
+        if (currentStep == 6) {
           Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return const StepRegAuth();
-          },
-        ));
+            builder: (context) {
+              return const StepRegAuth();
+            },
+          ));
         }
       });
     }, onError: (e) {
-      print(e);
+      // debugPrint(e);
     });
   }
 
@@ -62,6 +63,9 @@ class _StepperHomeState extends State<StepperHome> {
     ),
     StepperData(
       label: 'Step 4',
+    ),
+    StepperData(
+      label: 'Step 5',
     ),
   ];
 
@@ -105,19 +109,20 @@ class _StepperHomeState extends State<StepperHome> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Column(
                   children: [
                     if (currentStep == 1) ...[
                       const RegStepName(),
-                    ] else if (currentStep == 2) ...[
+                    ] else if (currentStep == 2)
+                      ...[
+                        const RegStepPhotoNotice(),
+                      ]
+                    else if (currentStep == 3) ...[
                       const RegStepDob(),
-                    ] else if (currentStep == 3) ...[
+                    ] else if (currentStep == 4) ...[
                       const RegStepMobile(),
-                    ] 
-                    // else if (currentStep == 4) ...[
-                    //   const RegStepLocation(),
-                    // ],
+                    ],
                   ],
                 ),
               ),
