@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/Activity/matching/don_view_indi_match_item.dart';
 import 'package:donatem/screens/main/navigation_bar.dart';
-import 'package:donatem/screens/main/rec%20ui/recievable%20items/view_receive_match_item.dart';
 import 'package:donatem/shared/card_4.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,14 +9,14 @@ import 'package:flutterflow_paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class RecievableItemSelect extends StatefulWidget {
-  const RecievableItemSelect({super.key});
+class DonMatchItemSelect extends StatefulWidget {
+  const DonMatchItemSelect({super.key});
 
   @override
-  State<RecievableItemSelect> createState() => _RecievableItemSelectState();
+  State<DonMatchItemSelect> createState() => _DonMatchItemSelectState();
 }
 
-class _RecievableItemSelectState extends State<RecievableItemSelect> {
+class _DonMatchItemSelectState extends State<DonMatchItemSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,6 +144,7 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
           final String itemTitle = json['item_title'];
           final String date = json['date'];
           final String item = json['item'];
+          final String assignId = json['assigned_to'];
 
           return Column(
             children: [
@@ -156,8 +157,8 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
                   imageUrl: 'lib/assets/images/image1.jpg',
                   onTap: () {
                     String docId = documentSnapshots[index].reference.id;
-                    // 0 - item id, 1 - item title, 2 - doc id
-                    Get.to(() => const ViewReceiveMatchedItem(),arguments: [item.toString(),itemTitle.toString(),docId.toString()]);
+                    // 0 - item id, 1 - item title, 2 - doc id 3 - assign ID
+                    Get.to(() => const DonViewIndiMatchedItem(),arguments: [item.toString(),itemTitle.toString(),docId.toString(),assignId.toString()]);
                   },
                 ),
               ),
@@ -167,9 +168,9 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
         },
         query: FirebaseFirestore.instance
             .collection('donate history')
-            .where('assigned_to', isEqualTo: uid)
+            .where('item_owner', isEqualTo: uid)
             .where('assigned_status', isEqualTo: 1)
-            .where('status', isEqualTo: 'handshake'),
+            .where('status', isEqualTo: 'pending'),
         itemBuilderType: PaginateBuilderType.listView);
   }
 }

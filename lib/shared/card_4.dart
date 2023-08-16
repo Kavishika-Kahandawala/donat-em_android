@@ -9,12 +9,21 @@ class Card4 extends StatelessWidget {
   final String subHeading;
   final String imageUrl;
   final Function()? onTap;
-  
+
   const Card4(
       {super.key,
       required this.heading,
       required this.subHeading,
-      required this.imageUrl, this.onTap});
+      required this.imageUrl,
+      this.onTap});
+
+  String truncateString(String input, int maxLength) {
+    if (input.length <= maxLength) {
+      return input;
+    } else {
+      return input.substring(0, maxLength) + '...';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,7 @@ class Card4 extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         child: Material(
           child: InkWell(
-            onTap:onTap,
+            onTap: onTap,
             child: Ink(
               // width: MediaQuery.of(context).size.width * 0.80,
               color: Colors.deepPurple[100],
@@ -40,14 +49,14 @@ class Card4 extends StatelessWidget {
                         children: [
                           // Heading
                           Text(
-                            heading,
+                            truncateString(heading, 40),
                             style: GoogleFonts.poppins(fontSize: 22),
                           ),
                           const SizedBox(height: 10),
-    
+
                           // Sub Heading
                           Text(
-                            subHeading,
+                            truncateString(subHeading, 40),
                             style: GoogleFonts.poppins(fontSize: 12),
                           )
                         ],

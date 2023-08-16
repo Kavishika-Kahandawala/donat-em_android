@@ -1,3 +1,4 @@
+import 'package:donatem/screens/main/Activity/activityMain.dart';
 import 'package:donatem/screens/main/additem/item_desc.dart';
 import 'package:donatem/screens/main/home/home.dart';
 import 'package:donatem/screens/main/user_profile.dart';
@@ -5,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../samples/maps_search.dart';
 
 class HomeUI extends StatefulWidget {
   const HomeUI({super.key});
@@ -25,7 +25,7 @@ class _HomeUIState extends State<HomeUI> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const MainPageUI(),
-    const ItemDetails(),
+    const ActivityUI(),
     const ItemDetails(),
     const UserProfileUI()
   ];

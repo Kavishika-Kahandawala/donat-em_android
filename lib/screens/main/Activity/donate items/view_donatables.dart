@@ -1,22 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/navigation_bar.dart';
-import 'package:donatem/screens/main/rec%20ui/recievable%20items/view_receive_match_item.dart';
+import 'package:donatem/screens/main/Activity/donate%20items/view_donatables_item.dart';
 import 'package:donatem/shared/card_4.dart';
-import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
-class RecievableItemSelect extends StatefulWidget {
-  const RecievableItemSelect({super.key});
+class ViewDonatables extends StatefulWidget {
+  const ViewDonatables({super.key});
 
   @override
-  State<RecievableItemSelect> createState() => _RecievableItemSelectState();
+  State<ViewDonatables> createState() => _ViewDonatablesState();
 }
 
-class _RecievableItemSelectState extends State<RecievableItemSelect> {
+class _ViewDonatablesState extends State<ViewDonatables> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,41 +54,8 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
       return input.substring(0, maxLength) + '...';
     }
   }
-// String longText = 'This is a long piece of text that needs to be truncated.';
-  // int maxLength = 20;
+  
 
-  // String truncatedText = '';
-
-  // Future assign(String itemRefId, String recId) async {
-  //   try {
-  //     await FirebaseFirestore.instance
-  //         .collection('donation items')
-  //         .doc(itemRefId)
-  //         .set(
-  //       {
-  //         'assigned_status': 1,
-  //         'assigned_to': recId,
-  //       },
-  //       SetOptions(merge: true),
-  //     );
-  //     await FirebaseFirestore.instance.collection('donate history').doc().set(
-  //       {
-  //         'assigned_status': 1,
-  //         'assigned_to': recId,
-  //         'item_owner': uid,
-  //         'item': itemRefId,
-  //         'date': DateTime.now().toString(),
-  //         'status': 'pending'
-  //       },
-  //       SetOptions(merge: true),
-  //     );
-
-  //     //thanks last
-  //     await Get.to(() => const DonatedThanks(), arguments: [recId.toString()]);
-  //   } catch (e) {
-  //     //catch error
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,20 +70,14 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
         onEmpty: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'No items matched yet. But have hope!',
-                style:
-                    TextStyle(color: Colors.deepPurple.shade300, fontSize: 20),
-              ),
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: InputButton1(
-                    onTap: () {
-                      Get.to(() => const HomeUI());
-                    },
-                    text: "Go to Home"),
+              Center(
+                child: Text(
+                  'No items added yet. Start adding today!',
+                  style:
+                      TextStyle(color: Colors.deepPurple.shade300, fontSize: 20),textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),
@@ -141,9 +99,8 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
           final Map<String, dynamic> json =
               documentSnapshots[index].data() as Map<String, dynamic>;
 
-          final String itemTitle = json['item_title'];
-          final String date = json['date'];
-          final String item = json['item'];
+          final String productName = json['product_name'];
+          final String productDesc = json['product_desc'];
 
           return Column(
             children: [
@@ -151,13 +108,13 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
               SizedBox(
                 height: 120,
                 child: Card4(
-                  heading: itemTitle,
-                  subHeading: 'Matched on: '+DateFormat.yMEd().format(DateTime.parse(date)),
+                  heading: productName,
+                  subHeading: productDesc,
                   imageUrl: 'lib/assets/images/image1.jpg',
                   onTap: () {
                     String docId = documentSnapshots[index].reference.id;
-                    // 0 - item id, 1 - item title, 2 - doc id
-                    Get.to(() => const ViewReceiveMatchedItem(),arguments: [item.toString(),itemTitle.toString(),docId.toString()]);
+                    // 0 - item id, 1 - item title
+                    Get.to(() => const ViewDonatablesItem(),arguments: [docId.toString(),productName.toString()]);
                   },
                 ),
               ),
@@ -166,10 +123,10 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
           );
         },
         query: FirebaseFirestore.instance
-            .collection('donate history')
-            .where('assigned_to', isEqualTo: uid)
-            .where('assigned_status', isEqualTo: 1)
-            .where('status', isEqualTo: 'handshake'),
+            .collection('donation items')
+            .where('assigned_status', isEqualTo: 0)
+            .where('uid', isEqualTo: uid.toString())
+            .where('status', isEqualTo: 1),
         itemBuilderType: PaginateBuilderType.listView);
   }
 }

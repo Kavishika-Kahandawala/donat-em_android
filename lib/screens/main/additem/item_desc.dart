@@ -43,6 +43,7 @@ class _ItemDetailsState extends State<ItemDetails> {
       {
         'product_name': itemNameController.text.trim(),
         'product_desc': itemDescController.text.trim(),
+        'estimation':0.0,
         'uid': uid,
         'status': 0,
       },
