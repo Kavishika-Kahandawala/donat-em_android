@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/home/events%20happening%20now/home_display_all_events.dart';
-import 'package:donatem/shared/card_5.dart';
 import 'package:donatem/shared/home_streambuilder.dart';
 import 'package:donatem/shared/home_streambuilder_recs.dart';
 import 'package:firebase_auth/firebase_auth.dart';

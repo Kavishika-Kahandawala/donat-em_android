@@ -1,19 +1,17 @@
-import 'package:donatem/screens/donate/select_donate_item.dart';
 import 'package:donatem/screens/main/navigation_bar.dart';
+import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart%20%20';
 
-import '../../shared/inputButton_1.dart';
-
-class DonatedThanks extends StatefulWidget {
-  const DonatedThanks({super.key});
+class ReceiveMatchAccepted extends StatefulWidget {
+  const ReceiveMatchAccepted({super.key});
 
   @override
-  State<DonatedThanks> createState() => _DonatedThanksState();
+  State<ReceiveMatchAccepted> createState() => _ReceiveMatchAcceptedState();
 }
 
-class _DonatedThanksState extends State<DonatedThanks> {
+class _ReceiveMatchAcceptedState extends State<ReceiveMatchAccepted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +26,7 @@ class _DonatedThanksState extends State<DonatedThanks> {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    'Thank you for you donation',
+                    'Item has been accepted',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -37,23 +35,17 @@ class _DonatedThanksState extends State<DonatedThanks> {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    'Together, let\'s help each others who are in need',
+                    'Donation has been finalized. Enjoy your donation!',
                     style: GoogleFonts.poppins(
                       color: Colors.grey.shade400,
                       fontSize: 20,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 60),
                   InputButton1(onTap: (){
-                    Get.to(() => const DonateItemSelect(), arguments: [
-                      Get.arguments[0].toString(),
-                    ]);
-                  }, text: "Add more Items"),
-                  const SizedBox(height: 15),
-                  InputButton1(onTap: (){
-                    Get.to(() => const HomeUI());
-                  }, text: "Go to Home"),
+                    Get.to(()=> const HomeUI());
+                  }, text: "Complete Process"),
                 ],
               ),
             ),

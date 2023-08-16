@@ -1,6 +1,8 @@
 import 'package:donatem/screens/main/org%20ui/view_org_avail_event.dart';
 import 'package:donatem/screens/main/rec%20ui/edit%20preferences/edit_rec_pref.dart';
 import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_notice.dart';
+import 'package:donatem/screens/main/rec%20ui/matching/view_matches.dart';
+import 'package:donatem/screens/main/rec%20ui/recievable%20items/view_recievables.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart  ';
@@ -44,9 +46,15 @@ class _RecMainUIState extends State<RecMainUI> {
                         },
                       ),
                       ListTile(
-                        title: const Text('View my receivable items status'),
+                        title: const Text('View matched items'),
                         onTap: () {
-                          Get.to(() => const ViewOrgAvailEvents());
+                          Get.to(() => const MatchItemSelect());
+                        },
+                      ),
+                      ListTile(
+                        title: const Text('View my receivable items'),
+                        onTap: () {
+                          Get.to(() => const RecievableItemSelect());
                         },
                       ),
                       ListTile(

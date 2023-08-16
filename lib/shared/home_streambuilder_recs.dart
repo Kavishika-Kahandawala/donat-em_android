@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/loyalty/loyalty.dart';
 import 'package:donatem/shared/card_3.dart';
 import 'package:donatem/shared/card_5.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeStreamBuilderRec extends StatefulWidget {
@@ -26,6 +27,10 @@ class HomeStreamBuilderRec extends StatefulWidget {
 }
 
 class _HomeStreamBuilderRecState extends State<HomeStreamBuilderRec> {
+
+ // firebase uid
+  String currentUid = FirebaseAuth.instance.currentUser!.uid.toString();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -33,6 +38,8 @@ class _HomeStreamBuilderRecState extends State<HomeStreamBuilderRec> {
           .collection(widget.collectionName)
           .limit(widget.queryLimit)
           .where('receiver_reg_status', isEqualTo: 1)
+          //Exclude current user from the list
+          .where(FieldPath.documentId, isNotEqualTo: currentUid)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -48,7 +55,6 @@ class _HomeStreamBuilderRecState extends State<HomeStreamBuilderRec> {
         }
         final userSnapshot = snapshot.data?.docs;
         if (userSnapshot!.isEmpty) {
-          //  TODO: Change what on no data
           return Row(
             children: [
               Padding(
@@ -75,16 +81,10 @@ class _HomeStreamBuilderRecState extends State<HomeStreamBuilderRec> {
                 return Card5(
                   onTap: widget.onTap,
                   heading: 'Interested in :',
+                  id: userSnapshot[index].reference.id.toString(),
                   subHeading: userSnapshot[index][widget.subHeading],
                   imageUrl: '',
                 );
-                // Card5(
-                //   onTap: widget.onTap,
-                //   heading: 'Interested in :',
-                //   subHeading: userSnapshot[index][widget.subHeading],
-                //   imageUrl:
-                //       '',
-                // );
               },
               separatorBuilder: (context, index) {
                 return const SizedBox(width: 10);

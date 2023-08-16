@@ -62,6 +62,8 @@ class _PhotoUploadUI1State extends State<PhotoUploadUI1> {
       {
         'item_image_url_' + Get.arguments[1]: urlDownload,
         'image_count': int.parse(Get.arguments[1]),
+        'status':2,
+        'assigned_status':0,
       },
       SetOptions(merge: true),
     );

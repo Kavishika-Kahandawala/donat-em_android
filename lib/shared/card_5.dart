@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:donatem/screens/main/home/events%20happening%20now/view_indi_rec.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Card5 extends StatelessWidget {
@@ -9,6 +11,7 @@ class Card5 extends StatelessWidget {
   // Event Heading
   final List subHeading;
   final String imageUrl;
+  final String id;
   final Function()? onTap;
 
   Card5(
@@ -16,7 +19,7 @@ class Card5 extends StatelessWidget {
       required this.heading,
       required this.subHeading,
       required this.imageUrl,
-      required this.onTap});
+      required this.onTap, required this.id});
 
   String _getDisplayText() {
     if (subHeading.length <= 1) {
@@ -49,7 +52,7 @@ class Card5 extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-        
+        Get.to(() => const ViewIndiRecDetails(),arguments: [id.toString(),subHeading]);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
