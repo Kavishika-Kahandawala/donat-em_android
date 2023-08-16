@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/inputButton_1.dart';
-import '../../shared/inputTextArea_1.dart';
-import '../../shared/inputTextArea_2.dart';
+import '../shared/inputButton_1.dart';
+import '../shared/inputTextArea_1.dart';
+import '../shared/inputTextArea_2.dart';
 
 
 class StepSample extends StatefulWidget {

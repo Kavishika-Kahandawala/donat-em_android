@@ -1,6 +1,7 @@
 import 'package:donatem/screens/main/Activity/activityMain.dart';
 import 'package:donatem/screens/main/additem/item_desc.dart';
 import 'package:donatem/screens/main/home/home.dart';
+import 'package:donatem/screens/main/loyalty/loyalty.dart';
 import 'package:donatem/screens/main/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ class _HomeUIState extends State<HomeUI> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const MainPageUI(),
+    const LoyaltyUI(),
     const ActivityUI(),
-    const ItemDetails(),
     const UserProfileUI()
   ];
 
@@ -55,8 +56,8 @@ class _HomeUIState extends State<HomeUI> {
                     text: 'Loyalty Points',
                   ),
                   GButton(
-                    icon: Icons.history,
-                    text: 'History',
+                    icon: Icons.supervisor_account,
+                    text: 'Activity',
                   ),
                   GButton(
                     icon: Icons.account_circle,

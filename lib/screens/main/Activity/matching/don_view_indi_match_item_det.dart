@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/Activity/matching/don_match_dismissed.dart';
-import 'package:donatem/screens/main/rec%20ui/matching/rec_match_accepted.dart';
-import 'package:donatem/screens/main/rec%20ui/matching/rec_match_dismissed.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
