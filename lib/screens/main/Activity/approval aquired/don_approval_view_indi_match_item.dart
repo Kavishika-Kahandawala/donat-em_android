@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/Activity/donate%20items/view_donatables_det.dart';
+import 'package:donatem/screens/main/Activity/approval%20aquired/don_approval_view_indi_match_item_det.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ViewDonatablesItem extends StatefulWidget {
-  const ViewDonatablesItem({super.key});
+class DonApprovalIndiMatchedItem extends StatefulWidget {
+  const DonApprovalIndiMatchedItem({super.key});
 
   @override
-  State<ViewDonatablesItem> createState() => _ViewDonatablesItemState();
+  State<DonApprovalIndiMatchedItem> createState() => _DonApprovalIndiMatchedItemState();
 }
 
-class _ViewDonatablesItemState extends State<ViewDonatablesItem> {
+class _DonApprovalIndiMatchedItemState extends State<DonApprovalIndiMatchedItem> {
   @override
   void initState() {
     super.initState();
@@ -100,6 +100,7 @@ class _ViewDonatablesItemState extends State<ViewDonatablesItem> {
                                       fontSize: 16, color: Colors.grey),
                                 ),
                               ),
+                              // const SizedBox(height: 80),
                             ],
                           );
                         },
@@ -108,13 +109,18 @@ class _ViewDonatablesItemState extends State<ViewDonatablesItem> {
                   );
                 },
               ),
+              
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: InputButton1(
                   onTap: () {
-                    Get.to(() => const ViewDonatablesItemItemDetails(),
-                        // 0 - item id
-                        arguments: [Get.arguments[0]]);
+                    Get.to(() => const DonApprovalViewIndiMatchedItemDetails(),
+                        // 0 - item id , 1- doc id 2- assigner's id
+                        arguments: [
+                          Get.arguments[0].toString(),
+                          Get.arguments[2].toString(),
+                          Get.arguments[3].toString()
+                        ]);
                   },
                   text: 'View details',
                 ),

@@ -9,10 +9,12 @@ class ViewDonatablesApprovalItem extends StatefulWidget {
   const ViewDonatablesApprovalItem({super.key});
 
   @override
-  State<ViewDonatablesApprovalItem> createState() => _ViewDonatablesApprovalItemState();
+  State<ViewDonatablesApprovalItem> createState() =>
+      _ViewDonatablesApprovalItemState();
 }
 
-class _ViewDonatablesApprovalItemState extends State<ViewDonatablesApprovalItem> {
+class _ViewDonatablesApprovalItemState
+    extends State<ViewDonatablesApprovalItem> {
   @override
   void initState() {
     super.initState();
@@ -100,21 +102,6 @@ class _ViewDonatablesApprovalItemState extends State<ViewDonatablesApprovalItem>
                                       fontSize: 16, color: Colors.grey),
                                 ),
                               ),
-                              const SizedBox(height: 80),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: InputButton1(
-                                  onTap: () {
-                                    Get.to(
-                                        () =>
-                                            const ViewDonatablesItemItemDetails(),
-                                            // 0 - item id
-                                        arguments: [Get.arguments[0]]);
-                                  },
-                                  text: 'View details',
-                                ),
-                              ),
                             ],
                           );
                         },
@@ -123,6 +110,18 @@ class _ViewDonatablesApprovalItemState extends State<ViewDonatablesApprovalItem>
                   );
                 },
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: InputButton1(
+                  onTap: () {
+                    Get.to(() => const ViewDonatablesItemItemDetails(),
+                        // 0 - item id
+                        arguments: [Get.arguments[0]]);
+                  },
+                  text: 'View details',
+                ),
+              ),
+              const SizedBox(height: 80),
             ],
           ),
         ),

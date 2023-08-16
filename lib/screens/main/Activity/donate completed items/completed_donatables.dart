@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/Activity/donate%20items/view_donatables_item.dart';
+import 'package:donatem/screens/main/Activity/donate%20completed%20items/completed_donatables_item.dart';
 import 'package:donatem/shared/card_4.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
 
-class ViewDonatables extends StatefulWidget {
-  const ViewDonatables({super.key});
+class CompletedViewDonatables extends StatefulWidget {
+  const CompletedViewDonatables({super.key});
 
   @override
-  State<ViewDonatables> createState() => _ViewDonatablesState();
+  State<CompletedViewDonatables> createState() => _CompletedViewDonatablesState();
 }
 
-class _ViewDonatablesState extends State<ViewDonatables> {
+class _CompletedViewDonatablesState extends State<CompletedViewDonatables> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +114,7 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
                   onTap: () {
                     String docId = documentSnapshots[index].reference.id;
                     // 0 - item id, 1 - item title
-                    Get.to(() => const ViewDonatablesItem(),arguments: [docId.toString(),productName.toString()]);
+                    Get.to(() => const CompletedViewDonatablesItem(),arguments: [docId.toString(),productName.toString()]);
                   },
                 ),
               ),

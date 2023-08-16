@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/rec%20ui/recievable%20items/receive_match_accepted.dart';
-import 'package:donatem/screens/main/rec%20ui/recievable%20items/receive_match_dismissed.dart';
+import 'package:donatem/screens/main/Activity/matching/don_match_dismissed.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +7,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 
-class ViewReceiveMatchedItemDetails extends StatefulWidget {
-  const ViewReceiveMatchedItemDetails({super.key});
+class DonApprovalViewIndiMatchedItemDetails extends StatefulWidget {
+  const DonApprovalViewIndiMatchedItemDetails({super.key});
 
   @override
-  State<ViewReceiveMatchedItemDetails> createState() =>
-      _ViewReceiveMatchedItemDetailsState();
+  State<DonApprovalViewIndiMatchedItemDetails> createState() =>
+      _DonApprovalViewIndiMatchedItemDetailsState();
 }
 
-class _ViewReceiveMatchedItemDetailsState
-    extends State<ViewReceiveMatchedItemDetails> {
+class _DonApprovalViewIndiMatchedItemDetailsState
+    extends State<DonApprovalViewIndiMatchedItemDetails> {
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
   String itemCategory = '';
@@ -26,17 +25,16 @@ class _ViewReceiveMatchedItemDetailsState
   String productDesc = '';
   String donLoc = '';
   String refId='';
-  String donFinalId='';
   String historyRefId='';
+  String assignId = '';
+  String recName='';
   String donorName='';
   String donorPhone='';
-  double donorLoyalty=0.0;
-  double estimation=0.0;
 
   double distance = 0.0;
 
-  Future getData(String snapId) async {
-    String donId = '';
+  Future getData(String snapId, String recId) async {
+    
     double donlat = 0.0;
     double donlng = 0.0;
     double reclat = 0.0;
@@ -52,25 +50,21 @@ class _ViewReceiveMatchedItemDetailsState
         itemSubCategory = querySnapshot.get('item_sub_category');
         productName = querySnapshot.get('product_name');
         productDesc = querySnapshot.get('product_desc');
-        donId = querySnapshot.get('uid');
-        donFinalId = querySnapshot.get('uid');
-        estimation = querySnapshot.get('estimation').toDouble();
+        donorName = querySnapshot.get('first_name') + ' ' + querySnapshot.get('last_name');
+        donorPhone = querySnapshot.get('mobile_number');
       });
     });
-    // donor get data?
+    // rec get data?
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(donId)
+        .doc(recId)
         .get()
         .then((querySnapshot) {
       donlat = querySnapshot.get('user_lat');
       donlng = querySnapshot.get('user_lng');
       donLoc = querySnapshot.get('user_location_name');
-        donorName = querySnapshot.get('first_name') + ' ' + querySnapshot.get('last_name');
-        donorPhone = querySnapshot.get('mobile_number');
-        donorLoyalty = querySnapshot.get('loyalty_points').toDouble();
     });
-    // user get data
+    // donor get data
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
@@ -81,51 +75,17 @@ class _ViewReceiveMatchedItemDetailsState
       LatLng point1 = LatLng(donlat, donlng);
       LatLng point2 = LatLng(reclat, reclng);
       setState(() {
+
         distance = const Distance().as(
           LengthUnit.Kilometer,
           point1,
           point2,
         );
+        print(distance);
       });
     });
   }
 
-  Future recAccepted() async {
-     await FirebaseFirestore.instance
-        .collection('donate history')
-        .doc(historyRefId)
-        .set(
-      {
-        'competed_date':DateTime.now().toString(),
-        'assigned_status':1,
-        'status':'completed',
-      },
-      SetOptions(merge: true),
-    );
-    await FirebaseFirestore.instance
-        .collection('donation items')
-        .doc(refId)
-        .set(
-      {
-        'status': 4,
-        'assigned_status':1,
-      },
-      SetOptions(merge: true),
-    );
-    // loyalty
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(donFinalId)
-        .set(
-      {
-        'loyalty_points':donorLoyalty+estimation,
-      },
-      SetOptions(merge: true),
-    );
-    {
-       Get.to(() => const ReceiveMatchAccepted());
-    }
-  }
   Future recDismissed() async {
      await FirebaseFirestore.instance
         .collection('donate history')
@@ -141,23 +101,12 @@ class _ViewReceiveMatchedItemDetailsState
         .doc(refId)
         .set(
       {
-        'status': 4,
         'assigned_status':0,
       },
       SetOptions(merge: true),
     );
-    // loyalty
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(donFinalId)
-        .set(
-      {
-        'loyalty_points':donorLoyalty,
-      },
-      SetOptions(merge: true),
-    );
     {
-       Get.to(() => const ReceiveMatchDismissed());
+       Get.to(() => const DonRecMatchDismissed());
     }
   }
 
@@ -166,7 +115,8 @@ class _ViewReceiveMatchedItemDetailsState
     super.initState();
     refId = Get.arguments[0].toString();
     historyRefId = Get.arguments[1].toString();
-    getData(Get.arguments[0].toString());
+    assignId = Get.arguments[2].toString();
+    getData(Get.arguments[0].toString(), Get.arguments[2].toString());
   }
 
   @override
@@ -265,7 +215,7 @@ class _ViewReceiveMatchedItemDetailsState
                   ),
                 ),
                 Text(
-                  'Donor Name',
+                  'Recipient Name',
                   style: GoogleFonts.poppins(
                     fontSize: 20,
                   ),
@@ -279,7 +229,7 @@ class _ViewReceiveMatchedItemDetailsState
                   ),
                 ),
                 Text(
-                  'Donor Phone Number',
+                  'Recipient Phone Number',
                   style: GoogleFonts.poppins(
                     fontSize: 20,
                   ),
@@ -296,13 +246,8 @@ class _ViewReceiveMatchedItemDetailsState
       
                 const SizedBox(height: 40),
                 InputButton1(
-                  onTap: recAccepted,
-                  text: 'Accept Item',
-                ),
-                const SizedBox(height: 15),
-                InputButton1(
                   onTap: recDismissed,
-                  text: 'Reject Item',
+                  text: 'Reject',
                 ),
                 const SizedBox(height: 15),
               ],

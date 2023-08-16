@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/rec%20ui/matching/rec_match_accepted.dart';
-import 'package:donatem/screens/main/rec%20ui/matching/rec_match_dismissed.dart';
 import 'package:donatem/screens/main/rec%20ui/matching/view_indi_match_item_det.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
@@ -102,21 +100,6 @@ class _ViewIndiMatchedItemState extends State<ViewIndiMatchedItem> {
                                       fontSize: 16, color: Colors.grey),
                                 ),
                               ),
-                              const SizedBox(height: 80),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: InputButton1(
-                                  onTap: () {
-                                    Get.to(
-                                        () =>
-                                            const ViewIndiMatchedItemDetails(),
-                                            // 0 - item id , 1- doc id
-                                        arguments: [Get.arguments[0].toString(),Get.arguments[2].toString()]);
-                                  },
-                                  text: 'View details',
-                                ),
-                              ),
                             ],
                           );
                         },
@@ -125,6 +108,21 @@ class _ViewIndiMatchedItemState extends State<ViewIndiMatchedItem> {
                   );
                 },
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: InputButton1(
+                  onTap: () {
+                    Get.to(() => const ViewIndiMatchedItemDetails(),
+                        // 0 - item id , 1- doc id
+                        arguments: [
+                          Get.arguments[0].toString(),
+                          Get.arguments[2].toString()
+                        ]);
+                  },
+                  text: 'View details',
+                ),
+              ),
+              const SizedBox(height: 80),
             ],
           ),
         ),

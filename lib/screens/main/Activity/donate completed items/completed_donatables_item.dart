@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/Activity/donate%20items/view_donatables_det.dart';
+import 'package:donatem/screens/main/Activity/donate%20completed%20items/completed_donatables_det.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ViewDonatablesItem extends StatefulWidget {
-  const ViewDonatablesItem({super.key});
+class CompletedViewDonatablesItem extends StatefulWidget {
+  const CompletedViewDonatablesItem({super.key});
 
   @override
-  State<ViewDonatablesItem> createState() => _ViewDonatablesItemState();
+  State<CompletedViewDonatablesItem> createState() =>
+      _CompletedViewDonatablesItemState();
 }
 
-class _ViewDonatablesItemState extends State<ViewDonatablesItem> {
+class _CompletedViewDonatablesItemState
+    extends State<CompletedViewDonatablesItem> {
   @override
   void initState() {
     super.initState();
@@ -112,7 +114,7 @@ class _ViewDonatablesItemState extends State<ViewDonatablesItem> {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: InputButton1(
                   onTap: () {
-                    Get.to(() => const ViewDonatablesItemItemDetails(),
+                    Get.to(() => const CompletedViewDonatablesItemDetails(),
                         // 0 - item id
                         arguments: [Get.arguments[0]]);
                   },

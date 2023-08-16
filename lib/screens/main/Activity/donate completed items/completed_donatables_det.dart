@@ -1,43 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/Activity/matching/don_match_dismissed.dart';
-import 'package:donatem/screens/main/rec%20ui/matching/rec_match_accepted.dart';
-import 'package:donatem/screens/main/rec%20ui/matching/rec_match_dismissed.dart';
+import 'package:donatem/screens/main/navigation_bar.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:latlong2/latlong.dart';
 
-class DonViewIndiMatchedItemDetails extends StatefulWidget {
-  const DonViewIndiMatchedItemDetails({super.key});
+class CompletedViewDonatablesItemDetails extends StatefulWidget {
+  const CompletedViewDonatablesItemDetails({super.key});
 
   @override
-  State<DonViewIndiMatchedItemDetails> createState() =>
-      _DonViewIndiMatchedItemDetailsState();
+  State<CompletedViewDonatablesItemDetails> createState() =>
+      _CompletedViewDonatablesItemDetailsState();
 }
 
-class _DonViewIndiMatchedItemDetailsState
-    extends State<DonViewIndiMatchedItemDetails> {
+class _CompletedViewDonatablesItemDetailsState
+    extends State<CompletedViewDonatablesItemDetails> {
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  String itemId = '';
   String itemCategory = '';
   String itemSubCategory = '';
   String productName = '';
   String productDesc = '';
-  String donLoc = '';
-  String refId='';
-  String historyRefId='';
-  String assignId = '';
+  double estimation=0.0;
 
-  double distance = 0.0;
-
-  Future getData(String snapId, String recId) async {
-    
-    double donlat = 0.0;
-    double donlng = 0.0;
-    double reclat = 0.0;
-    double reclng = 0.0;
+  Future getData(String snapId) async {
 
     await FirebaseFirestore.instance
         .collection('donation items')
@@ -49,72 +37,39 @@ class _DonViewIndiMatchedItemDetailsState
         itemSubCategory = querySnapshot.get('item_sub_category');
         productName = querySnapshot.get('product_name');
         productDesc = querySnapshot.get('product_desc');
-      });
-    });
-    // rec get data?
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(recId)
-        .get()
-        .then((querySnapshot) {
-      donlat = querySnapshot.get('user_lat');
-      donlng = querySnapshot.get('user_lng');
-      donLoc = querySnapshot.get('user_location_name');
-    });
-    // donor get data
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .get()
-        .then((querySnapshot) {
-      reclat = querySnapshot.get('user_lat');
-      reclng = querySnapshot.get('user_lng');
-      LatLng point1 = LatLng(donlat, donlng);
-      LatLng point2 = LatLng(reclat, reclng);
-      setState(() {
-
-        distance = const Distance().as(
-          LengthUnit.Kilometer,
-          point1,
-          point2,
-
-        );
-        print(distance);
+        estimation = querySnapshot.get('estimation').toDouble();
       });
     });
   }
 
-  Future recDismissed() async {
-     await FirebaseFirestore.instance
-        .collection('donate history')
-        .doc(historyRefId)
-        .set(
-      {
-        'assigned_status':0,
-      },
-      SetOptions(merge: true),
-    );
-     await FirebaseFirestore.instance
-        .collection('donation items')
-        .doc(refId)
-        .set(
-      {
-        'assigned_status':0,
-      },
-      SetOptions(merge: true),
-    );
-    {
-       Get.to(() => const DonRecMatchDismissed());
-    }
-  }
+  // Future recDismissed() async {
+
+  //   DocumentReference itemDocRef = FirebaseFirestore.instance.collection('donate history').doc(itemId);
+  //   DocumentSnapshot documentSnapshot = await itemDocRef.get();
+  //   if (documentSnapshot.exists) {
+  //     await itemDocRef.set({'assigned_status': 0}, SetOptions(merge: true));
+  //   }
+
+  //    await FirebaseFirestore.instance
+  //       .collection('donation items')
+  //       .doc(itemId)
+  //       .set(
+  //     {
+  //       'status': 5,
+  //       'assigned_status':0,
+  //     },
+  //     SetOptions(merge: true),
+  //   );
+  //   {
+  //      Get.to(() => const ViewDonatablesDismissed());
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    refId = Get.arguments[0].toString();
-    historyRefId = Get.arguments[1].toString();
-    assignId = Get.arguments[2].toString();
-    getData(Get.arguments[0].toString(), Get.arguments[2].toString());
+    itemId = Get.arguments[0].toString();
+    getData(Get.arguments[0].toString());
   }
 
   @override
@@ -184,40 +139,28 @@ class _DonViewIndiMatchedItemDetailsState
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Recipient\'s Location:',
+                  'Earned loyalty points:',
                   style: GoogleFonts.poppins(
                     fontSize: 20,
                   ),
                 ),
                 // const SizedBox(height: 20),
                 Text(
-                  donLoc,
+                  estimation.toString(),
                   style: GoogleFonts.poppins(
                     color: Colors.grey.shade400,
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  'Distance',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                  ),
-                ),
-                // const SizedBox(height: 20),
-                Text(
-                  distance.toString() + ' km',
-                  style: GoogleFonts.poppins(
-                    color: Colors.grey.shade400,
-                    fontSize: 20,
-                  ),
-                ),
+                
                 const SizedBox(height: 20),
       
                 const SizedBox(height: 40),
                 InputButton1(
-                  onTap: recDismissed,
-                  text: 'Reject',
+                  onTap: (){
+                    Get.to(() => const HomeUI());
+                  },
+                  text: 'Back to Home',
                 ),
                 const SizedBox(height: 15),
               ],

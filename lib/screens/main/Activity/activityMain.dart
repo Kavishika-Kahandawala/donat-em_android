@@ -1,3 +1,4 @@
+import 'package:donatem/screens/main/Activity/donate%20completed%20items/completed_donatables.dart';
 import 'package:donatem/screens/main/Activity/donate%20items%20approval/view_donatables_Approval.dart';
 import 'package:donatem/screens/main/Activity/donate%20items/view_donatables.dart';
 import 'package:donatem/screens/main/Activity/matching/don_view_matches.dart';
@@ -71,7 +72,7 @@ class _ActivityUIState extends State<ActivityUI> {
                       ListTile(
                         title: const Text('Donated items'),
                         onTap: () {
-                          // Get.to(() => const RecievableItemSelect());
+                          Get.to(() => const CompletedViewDonatables());
                         },
                       ),
                     ],
