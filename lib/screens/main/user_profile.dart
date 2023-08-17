@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/additem/item_desc.dart';
+import 'package:donatem/screens/main/edit%20user/change_location.dart';
 import 'package:donatem/screens/main/edit%20user/edit_user_details.dart';
 import 'package:donatem/screens/main/org%20reg/org_reg_notice.dart';
 import 'package:donatem/screens/main/org%20ui/org_ui_main.dart';
@@ -116,6 +117,12 @@ class _UserProfileUIState extends State<UserProfileUI> {
                       title: const Text('Edit profile'),
                       onTap: () {
                         Get.to(() => const EditUserDetails());
+                      },
+                    ),
+                    ListTile(
+                      title: const Text('Change Location'),
+                      onTap: () {
+                        Get.to(() => const ChangeUserLocation());
                       },
                     ),
                     // If user is a receiver

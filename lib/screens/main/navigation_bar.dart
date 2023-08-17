@@ -1,5 +1,4 @@
 import 'package:donatem/screens/main/Activity/activityMain.dart';
-import 'package:donatem/screens/main/additem/item_desc.dart';
 import 'package:donatem/screens/main/home/home.dart';
 import 'package:donatem/screens/main/loyalty/loyalty.dart';
 import 'package:donatem/screens/main/user_profile.dart';

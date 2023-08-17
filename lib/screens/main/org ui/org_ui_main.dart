@@ -1,4 +1,5 @@
 import 'package:donatem/screens/main/org%20ui/exit%20org/exit_org_notice.dart';
+import 'package:donatem/screens/main/org%20ui/org%20events%20handle/handle_view_all_events.dart';
 import 'package:donatem/screens/main/org%20ui/start%20event/start_org_event_intro.dart';
 import 'package:donatem/screens/main/org%20ui/view_org_avail_event.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _OrgMainUIState extends State<OrgMainUI> {
                       ListTile(
                         title: const Text('View my events'),
                         onTap: () {
-                          Get.to(() => const ViewOrgAvailEvents());
+                          Get.to(() => const HandleOrgEventSelect());
                         },
                       ),
                       ListTile(

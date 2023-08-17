@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/home/events%20happening%20now/home_display_all_events.dart';
+import 'package:donatem/screens/main/home/events%20happening%20now/home_display_all_reciepients.dart';
+import 'package:donatem/screens/main/home/events%20happening%20now/home_display_all_shops_with_offers.dart';
 import 'package:donatem/shared/home_streambuilder.dart';
+import 'package:donatem/shared/home_streambuilder_offer.dart';
 import 'package:donatem/shared/home_streambuilder_recs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -171,7 +174,7 @@ class _MainPageUIState extends State<MainPageUI> {
                       HeadingSeeAll(
                         heading: 'Browse who can you help',
                         onTap: () {
-                          Get.to(() => const HomeDisplayAllEvents());
+                          Get.to(() => const HomeDisplayAllRecs());
                         },
                       ),
                       const SizedBox(height: 10),
@@ -200,16 +203,16 @@ class _MainPageUIState extends State<MainPageUI> {
                       HeadingSeeAll(
                         heading: 'Offers right now',
                         onTap: () {
-                          Get.to(() => const HomeDisplayAllEvents());
+                          Get.to(() => const HomeDisplayAllShopOffers());
                         },
                       ),
                       const SizedBox(height: 10),
                       // check whether sized box or container TODO:
-                      const HomeStreamBuilder(
-                        collectionName: 'store offers',
+                      const HomeStreamBuilderOffer(
+                        collectionName: 'shop offers',
                         queryLimit: 5,
-                        heading: 'event_name',
-                        subHeading: 'event_desc',
+                        heading: 'shop_name',
+                        subHeading: 'offer_desc',
                         noDataErrorText: 'offers',
                       ),
                     ],

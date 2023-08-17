@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/Activity/donate%20completed%20items/completed_donatables.dart';
 import 'package:donatem/screens/main/Activity/donate%20items%20approval/view_donatables_Approval.dart';
 import 'package:donatem/screens/main/Activity/donate%20items/view_donatables.dart';
 import 'package:donatem/screens/main/Activity/matching/don_view_matches.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,15 +16,50 @@ class ActivityUI extends StatefulWidget {
 }
 
 class _ActivityUIState extends State<ActivityUI> {
+
+    // firestore strings
+  String firstName = '';
+  String greeting = '';
+
+  // firebase uid
+  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+  Future loadUserInfo() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get()
+        .then((querySnapshot) {
+      setState(() {
+        firstName = querySnapshot.get('first_name');
+      });
+    });
+  }
+
+  void greetings() {
+    final hour = TimeOfDay.now().hour;
+    String output = 'Good Evening,';
+    if (hour < 12) {
+      output = 'Good Morning,';
+    } else if (hour <= 17) {
+      output = 'Good Afternoon,';
+    }
+
+    setState(() {
+      greeting = output;
+    });
+  }
+
+  @override
+  void initState() {
+    greetings();
+    loadUserInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: const Text('Home'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple.shade300,
-        elevation:0.0,
-      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
@@ -31,13 +68,46 @@ class _ActivityUIState extends State<ActivityUI> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'View my activity',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      Text(
+                        greeting,
+                        style: GoogleFonts.poppins(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        firstName,
+                        style: GoogleFonts.poppins(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[100],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.person),
+                  ),
+                ],
               ),
+              // Text(
+              //   'View my activity',
+              //   style: GoogleFonts.poppins(
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 32,
+              //   ),
+              // ),
               
               const SizedBox(height: 30),
               Expanded(

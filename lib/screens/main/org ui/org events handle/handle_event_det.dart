@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/org%20ui/org%20events%20handle/handle_event_dismissed.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 
-class ViewIndiEventDetails extends StatefulWidget {
-  const ViewIndiEventDetails({super.key});
+class HandleOrgEventDetails extends StatefulWidget {
+  const HandleOrgEventDetails({super.key});
 
   @override
-  State<ViewIndiEventDetails> createState() => _ViewIndiEventDetailsState();
+  State<HandleOrgEventDetails> createState() => _HandleOrgEventDetailsState();
 }
 
-class _ViewIndiEventDetailsState extends State<ViewIndiEventDetails> {
+class _HandleOrgEventDetailsState extends State<HandleOrgEventDetails> {
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
@@ -115,6 +116,21 @@ class _ViewIndiEventDetailsState extends State<ViewIndiEventDetails> {
       orgfName = orgName;
       orgfUname = orgUname;
     });
+  }
+
+  Future recDismissed() async {
+     await FirebaseFirestore.instance
+        .collection('org events')
+        .doc(docId)
+        .set(
+      {
+        'status':0,
+      },
+      SetOptions(merge: true),
+    );
+    {
+       Get.to(() => const HandleOrgEventDismissed());
+    }
   }
 
   @override
@@ -243,6 +259,11 @@ class _ViewIndiEventDetailsState extends State<ViewIndiEventDetails> {
                     Get.back();
                   },
                   text: 'Go Back',
+                ),
+                const SizedBox(height: 15),
+                InputButton1(
+                  onTap: recDismissed,
+                  text: 'End event',
                 ),
                 const SizedBox(height: 20),
               ],

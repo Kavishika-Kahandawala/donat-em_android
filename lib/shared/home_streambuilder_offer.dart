@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/shared/card_3.dart';
+import 'package:donatem/shared/card_7.dart';
 import 'package:flutter/material.dart';
 import 'card_2.dart';
 import 'card_6.dart';
 
-class HomeStreamBuilder extends StatefulWidget {
+class HomeStreamBuilderOffer extends StatefulWidget {
   final String collectionName;
   final int queryLimit;
   final String heading;
   final String subHeading;
   final String noDataErrorText;
 
-  const HomeStreamBuilder(
+  const HomeStreamBuilderOffer(
       {super.key,
       required this.collectionName,
       required this.queryLimit,
@@ -20,10 +21,10 @@ class HomeStreamBuilder extends StatefulWidget {
       required this.noDataErrorText});
 
   @override
-  State<HomeStreamBuilder> createState() => _HomeStreamBuilderState();
+  State<HomeStreamBuilderOffer> createState() => _HomeStreamBuilderOfferState();
 }
 
-class _HomeStreamBuilderState extends State<HomeStreamBuilder> {
+class _HomeStreamBuilderOfferState extends State<HomeStreamBuilderOffer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -69,7 +70,7 @@ class _HomeStreamBuilderState extends State<HomeStreamBuilder> {
               scrollDirection: Axis.horizontal,
               itemCount: userSnapshot.length,
               itemBuilder: (context, index) {
-                return Card6(
+                return Card7(
                   id: userSnapshot[index].reference.id.toString(),
                   heading: userSnapshot[index][widget.heading].toString(),
                   subHeading: userSnapshot[index][widget.subHeading].toString(),

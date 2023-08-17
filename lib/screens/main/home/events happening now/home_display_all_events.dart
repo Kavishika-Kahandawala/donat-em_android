@@ -70,8 +70,8 @@ class _PaginatedFirestoreList extends StatelessWidget {
 
           final String eventDesc = json['event_desc'];
           final String eventName = json['event_name'];
-          final String orgId = json['org_id'];
-          final String uid = json['uid'];
+          // final String orgId = json['org_id'];
+          // final String uid = json['uid'];
 
           return Column(
             children: [
@@ -85,7 +85,7 @@ class _PaginatedFirestoreList extends StatelessWidget {
                   onTap: () {
                     String docId = documentSnapshots[index].reference.id;
                     // 0 = event name, 1 = event desc, 2 = org id, 3 = uid 4 = doc id
-                          Get.to(() => const ViewIndiEventDetails(), arguments: [eventName.toString(),eventDesc.toString(),orgId.toString(),uid.toString(),docId.toString()]);
+                          Get.to(() => const ViewIndiEventDetails(), arguments: [docId.toString()]);
                         },
                 ),
               ),
