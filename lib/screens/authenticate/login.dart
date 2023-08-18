@@ -35,7 +35,7 @@ class _LoginUIState extends State<LoginUI> {
         context: context,
         builder: (context) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: Colors.deepPurple,),
           );
         });
 

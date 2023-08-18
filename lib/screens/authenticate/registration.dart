@@ -35,7 +35,7 @@ class _RegisterUIState extends State<RegisterUI> {
         context: context,
         builder: (context) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: Colors.deepPurple,),
           );
         });
 
