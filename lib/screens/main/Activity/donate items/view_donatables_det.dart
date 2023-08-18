@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donatem/screens/main/Activity/donate%20items/view_donatables_dismissed.dart';
 import 'package:donatem/screens/main/navigation_bar.dart';
+import 'package:donatem/screens/qr/uni_qr.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -162,6 +163,13 @@ class _ViewDonatablesItemItemDetailsState
                     Get.to(() => const HomeUI());
                   },
                   text: 'Back to Home',
+                ),
+                const SizedBox(height: 15),
+                InputButton1(
+                  onTap: (){
+                    Get.to(() => const UniQr(),arguments: [itemId.toString()]);
+                  },
+                  text: 'SHow QR Code',
                 ),
                 const SizedBox(height: 15),
                 InputButton1(

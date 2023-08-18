@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/shared/app_img_urls.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _ViewIndiEventDetailsState extends State<ViewIndiEventDetails> {
   String recLoc = '';
   String eventFName = '';
   String eventFDesc = '';
+  String bannerImage='default';
 
   String _getDisplayText(List subHeading) {
       return subHeading.join(', '); // Display all items
@@ -62,6 +64,7 @@ class _ViewIndiEventDetailsState extends State<ViewIndiEventDetails> {
         reclat = querySnapshot.get('event_lat');
         reclng = querySnapshot.get('event_lng');
         recLoc = querySnapshot.get('event_location_name');
+        bannerImage = querySnapshot.get('event_banner');
 
         // eventTempImg = querySnapshot.get('event_banner');
         // if (eventTempImg == 'default') {
@@ -155,6 +158,21 @@ class _ViewIndiEventDetailsState extends State<ViewIndiEventDetails> {
                   ),
                 ),
                 const SizedBox(height: 10),
+                const SizedBox(height: 20),
+                if (bannerImage == 'default') ...[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: Image.network(AppImgUrls.defaultEvent,height: 200,width: MediaQuery.of(context).size.width,fit:BoxFit.cover),
+                    ),
+                    ] else...[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: Image.network(bannerImage,height: 50,width: 50,fit:BoxFit.cover),
+                    ),
+                    ],
+                    const SizedBox(height: 20),
                 // Event desc
                 Text(
                   eventFDesc,

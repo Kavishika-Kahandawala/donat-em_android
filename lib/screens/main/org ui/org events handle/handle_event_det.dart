@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/org%20ui/org%20event%20accept%20item/scan_qr_org_event_item.dart';
 import 'package:donatem/screens/main/org%20ui/org%20events%20handle/handle_event_dismissed.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -256,9 +257,9 @@ class _HandleOrgEventDetailsState extends State<HandleOrgEventDetails> {
                 const SizedBox(height: 40),
                 InputButton1(
                   onTap: () {
-                    Get.back();
+                    Get.to(() => const OrgEventAcceptItemQrRead());
                   },
-                  text: 'Go Back',
+                  text: 'Scan to accept item',
                 ),
                 const SizedBox(height: 15),
                 InputButton1(

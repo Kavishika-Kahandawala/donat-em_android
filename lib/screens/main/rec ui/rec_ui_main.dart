@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/org%20ui/view_org_avail_event.dart';
+import 'package:donatem/screens/main/rec%20ui/QR%20item/scan_qr_donor.dart';
 import 'package:donatem/screens/main/rec%20ui/edit%20preferences/edit_rec_pref.dart';
 import 'package:donatem/screens/main/rec%20ui/exit%20rec/exit_rec_notice.dart';
 import 'package:donatem/screens/main/rec%20ui/matching/view_matches.dart';
@@ -18,48 +18,56 @@ class RecMainUI extends StatefulWidget {
 
 class _RecMainUIState extends State<RecMainUI> {
     // firestore strings
-  String firstName = '';
-  String greeting = '';
+  // String firstName = '';
+  // String greeting = '';
+  // String profileImage='default';
 
-  // firebase uid
-  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  // // firebase uid
+  // String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  Future loadUserInfo() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .get()
-        .then((querySnapshot) {
-      setState(() {
-        firstName = querySnapshot.get('first_name');
-      });
-    });
-  }
+  // Future loadUserInfo() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(uid)
+  //       .get()
+  //       .then((querySnapshot) {
+  //     setState(() {
+  //       firstName = querySnapshot.get('first_name');
+  //       profileImage = querySnapshot.get('profile_picture');
+  //     });
+  //   });
+  // }
 
 
-  void greetings() {
-    final hour = TimeOfDay.now().hour;
-    String output = 'Good Evening,';
-    if (hour < 12) {
-      output = 'Good Morning,';
-    } else if (hour <= 17) {
-      output = 'Good Afternoon,';
-    }
+  // void greetings() {
+  //   final hour = TimeOfDay.now().hour;
+  //   String output = 'Good Evening,';
+  //   if (hour < 12) {
+  //     output = 'Good Morning,';
+  //   } else if (hour <= 17) {
+  //     output = 'Good Afternoon,';
+  //   }
 
-    setState(() {
-      greeting = output;
-    });
-  }
+  //   setState(() {
+  //     greeting = output;
+  //   });
+  // }
   @override
   void initState() {
-    greetings();
-    loadUserInfo();
+    // greetings();
+    // loadUserInfo();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // title: const Text('Home'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.deepPurple.shade300,
+        elevation:0.0,
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
@@ -68,42 +76,58 @@ class _RecMainUIState extends State<RecMainUI> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        Text(
-                          greeting,
-                          style: GoogleFonts.poppins(
-                            // fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          firstName,
-                          style: GoogleFonts.poppins(
-                            // fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple[100],
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.person),
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           const SizedBox(height: 20),
+              //           Text(
+              //             greeting,
+              //             style: GoogleFonts.poppins(
+              //               // fontWeight: FontWeight.bold,
+              //               fontSize: 18,
+              //             ),
+              //           ),
+              //           Text(
+              //             firstName,
+              //             style: GoogleFonts.poppins(
+              //               // fontWeight: FontWeight.bold,
+              //               fontSize: 30,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       if (profileImage == 'default') ...[
+              //         Container(
+              //         padding: const EdgeInsets.all(12),
+              //         decoration: BoxDecoration(
+              //           color: Colors.deepPurple[100],
+              //           borderRadius: BorderRadius.circular(12),
+              //         ),
+              //         child: const Icon(Icons.person),
+              //       ),
+              //       ] else...[
+              //         ClipRRect(
+              //           borderRadius: BorderRadius.circular(12),
+              //         // ),
+              //         child: Image.network(profileImage,height: 50,width: 50,fit:BoxFit.cover),
+              //       ),
+              //       ],
+              //       // Container(
+              //       //   padding: const EdgeInsets.all(12),
+              //       //   decoration: BoxDecoration(
+              //       //     color: Colors.deepPurple[100],
+              //       //     borderRadius: BorderRadius.circular(12),
+              //       //   ),
+              //       //   child: const Icon(Icons.person),
+              //       // ),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Text(
                 'View my recipient account',
@@ -133,6 +157,12 @@ class _RecMainUIState extends State<RecMainUI> {
                         title: const Text('View my receivable items'),
                         onTap: () {
                           Get.to(() => const RecievableItemSelect());
+                        },
+                      ),
+                      ListTile(
+                        title: const Text('Scan QR to get the donor'),
+                        onTap: () {
+                          Get.to(() => const QrScanDonor());
                         },
                       ),
                       ListTile(

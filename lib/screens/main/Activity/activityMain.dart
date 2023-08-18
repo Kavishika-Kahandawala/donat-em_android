@@ -16,10 +16,10 @@ class ActivityUI extends StatefulWidget {
 }
 
 class _ActivityUIState extends State<ActivityUI> {
-
-    // firestore strings
+  // firestore strings
   String firstName = '';
   String greeting = '';
+  String profileImage = 'default';
 
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -32,6 +32,7 @@ class _ActivityUIState extends State<ActivityUI> {
         .then((querySnapshot) {
       setState(() {
         firstName = querySnapshot.get('first_name');
+        profileImage = querySnapshot.get('profile_picture');
       });
     });
   }
@@ -91,14 +92,31 @@ class _ActivityUIState extends State<ActivityUI> {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[100],
-                      borderRadius: BorderRadius.circular(12),
+                  // Container(
+                  //   padding: const EdgeInsets.all(12),
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.deepPurple[100],
+                  //     borderRadius: BorderRadius.circular(12),
+                  //   ),
+                  //   child: const Icon(Icons.person),
+                  // ),
+                  if (profileImage == 'default') ...[
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple[100],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(Icons.person),
                     ),
-                    child: const Icon(Icons.person),
-                  ),
+                  ] else ...[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: Image.network(profileImage,
+                          height: 50, width: 50, fit: BoxFit.cover),
+                    ),
+                  ],
                 ],
               ),
               // Text(
@@ -108,7 +126,7 @@ class _ActivityUIState extends State<ActivityUI> {
               //     fontSize: 32,
               //   ),
               // ),
-              
+
               const SizedBox(height: 30),
               Expanded(
                 child: ListTileTheme(
@@ -122,7 +140,8 @@ class _ActivityUIState extends State<ActivityUI> {
                         },
                       ),
                       ListTile(
-                        title: const Text('View approval pending donation items'),
+                        title:
+                            const Text('View approval pending donation items'),
                         onTap: () {
                           Get.to(() => const ViewDonatablesAproval());
                         },

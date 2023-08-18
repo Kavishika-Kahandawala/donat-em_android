@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:donatem/screens/main/home/events%20happening%20now/view_indi_event_det.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,14 +12,43 @@ class Card6 extends StatelessWidget {
   final String subHeading;
   final String imageUrl;
   final String id;
-  const Card6(
+   Card6(
       {super.key,
       required this.heading,
       required this.subHeading,
       required this.imageUrl, required this.id});
 
+
+        final List<IconData> iconList = [
+    LineIcons.donate,
+    LineIcons.dove,
+    LineIcons.piggyBank,
+    LineIcons.ribbon,
+    LineIcons.handshake,
+    LineIcons.gift,
+    LineIcons.helpingHands,
+    LineIcons.handHoldingHeart,
+    LineIcons.seedling,
+  ];
+
+  final Random random = Random();
+
+   IconData getRandomIcon() {
+    int randomIndex = random.nextInt(iconList.length);
+    return iconList[randomIndex];
+  }
+  String truncateString(String input, int maxLength) {
+    if (input.length <= maxLength) {
+      return input;
+    } else {
+      return input.substring(0, maxLength) + '...';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    IconData randomIcon = getRandomIcon();
+
     return GestureDetector(
       onTap: (){
         Get.to(() => const ViewIndiEventDetails(),arguments: [id.toString()]);
@@ -51,7 +82,8 @@ class Card6 extends StatelessWidget {
                       //   ),
                       // ),
                       // Image.network(imageUrl, width: 40),
-                      Icon(LineIcons.byName('book')),
+                      // Icon(LineIcons.byName('book')),
+                      Icon(randomIcon, size: 30),
                       const SizedBox(height: 10),
     
                       // Heading
@@ -59,7 +91,8 @@ class Card6 extends StatelessWidget {
                       const SizedBox(height: 10),
     
                       // Sub Heading
-                      Text(subHeading)
+                      Text(truncateString(subHeading,80)),
+                      // Text(subHeading)
                     ],
                   ),
                 ),

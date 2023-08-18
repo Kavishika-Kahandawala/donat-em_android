@@ -28,6 +28,7 @@ class _MainPageUIState extends State<MainPageUI> {
   // firestore strings
   String firstName = '';
   String greeting = '';
+  String profileImage='default';
 
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -40,6 +41,7 @@ class _MainPageUIState extends State<MainPageUI> {
         .then((querySnapshot) {
       setState(() {
         firstName = querySnapshot.get('first_name');
+        profileImage = querySnapshot.get('profile_picture');
       });
     });
   }
@@ -136,7 +138,8 @@ class _MainPageUIState extends State<MainPageUI> {
                         ),
                       ],
                     ),
-                    Container(
+                     if (profileImage == 'default') ...[
+                      Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.deepPurple[100],
@@ -144,6 +147,13 @@ class _MainPageUIState extends State<MainPageUI> {
                       ),
                       child: const Icon(Icons.person),
                     ),
+                    ] else...[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: Image.network(profileImage,height: 50,width: 50,fit:BoxFit.cover),
+                    ),
+                    ],
                   ],
                 ),
               ),
@@ -166,7 +176,7 @@ class _MainPageUIState extends State<MainPageUI> {
                         collectionName: 'org events',
                         queryLimit: 5,
                         heading: 'event_name',
-                        subHeading: 'event_desc',
+                        subHeading: 'event_location_name',
                         noDataErrorText: 'events',
                       ),
                       const SizedBox(height: 20),

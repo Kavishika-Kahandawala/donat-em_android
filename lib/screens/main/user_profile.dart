@@ -27,6 +27,7 @@ class _UserProfileUIState extends State<UserProfileUI> {
 
   // firestore strings
   String firstName = '';
+  String profileImage='default';
 
   int orgRegStatus = 0;
   int recRegStatus = 0;
@@ -41,6 +42,7 @@ class _UserProfileUIState extends State<UserProfileUI> {
         firstName = querySnapshot.get('first_name');
         recRegStatus = querySnapshot.get('receiver_reg_status');
         orgRegStatus = querySnapshot.get('org_reg_status');
+        profileImage = querySnapshot.get('profile_picture');
       });
     });
   }
@@ -88,14 +90,30 @@ class _UserProfileUIState extends State<UserProfileUI> {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[100],
-                      borderRadius: BorderRadius.circular(12),
+                  if (profileImage == 'default') ...[
+                      Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple[100],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(Icons.person),
                     ),
-                    child: const Icon(Icons.person),
-                  ),
+                    ] else...[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: Image.network(profileImage,height: 50,width: 50,fit:BoxFit.cover),
+                    ),
+                    ],
+                  // Container(
+                  //   padding: const EdgeInsets.all(12),
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.deepPurple[100],
+                  //     borderRadius: BorderRadius.circular(12),
+                  //   ),
+                  //   child: const Icon(Icons.person),
+                  // ),
                 ],
               ),
             ),

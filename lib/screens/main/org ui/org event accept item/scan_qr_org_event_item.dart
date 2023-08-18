@@ -1,9 +1,8 @@
-import 'dart:convert';
+
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donatem/screens/main/loyalty/redeem_loyalty_amount.dart';
+import 'package:donatem/screens/main/org%20ui/org%20event%20accept%20item/scan_qr_org_event_receive_match_item.dart';
 import 'package:donatem/shared/inputButton_1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -13,60 +12,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class LoyaltyUI extends StatefulWidget {
-  const LoyaltyUI({super.key});
+class OrgEventAcceptItemQrRead extends StatefulWidget {
+  const OrgEventAcceptItemQrRead({super.key});
 
   @override
-  State<LoyaltyUI> createState() => _LoyaltyUIState();
+  State<OrgEventAcceptItemQrRead> createState() =>
+      _OrgEventAcceptItemQrReadState();
 }
 
-class _LoyaltyUIState extends State<LoyaltyUI> {
-  // firestore strings
-  String firstName = '';
-  String greeting = '';
-  String points = '';
-  String profileImage='default';
-
+class _OrgEventAcceptItemQrReadState extends State<OrgEventAcceptItemQrRead> {
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  Future loadUserInfo() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .get()
-        .then((querySnapshot) {
-      setState(() {
-        firstName = querySnapshot.get('first_name');
-        profileImage = querySnapshot.get('profile_picture');
-        points = querySnapshot.get('loyalty_points').toString();
-      });
-    });
-  }
-
-  void greetings() {
-    final hour = TimeOfDay.now().hour;
-    String output = 'Good Evening,';
-    if (hour < 12) {
-      output = 'Good Morning,';
-    } else if (hour <= 17) {
-      output = 'Good Afternoon,';
-    }
-
-    setState(() {
-      greeting = output;
-    });
-  }
-
-
   @override
   void initState() {
-    greetings();
-    loadUserInfo();
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,101 +36,39 @@ class _LoyaltyUIState extends State<LoyaltyUI> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.0),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        Text(
-                          greeting,
-                          style: GoogleFonts.poppins(
-                            // fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          firstName,
-                          style: GoogleFonts.poppins(
-                            // fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 30),
+                  Text(
+                    'Scan QR Code to accept Item',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32,
                     ),
-                    // Container(
-                    //   padding: const EdgeInsets.all(12),
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.deepPurple[100],
-                    //     borderRadius: BorderRadius.circular(12),
-                    //   ),
-                    //   child: const Icon(Icons.person),
-                    // ),
-                    if (profileImage == 'default') ...[
-                      Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple[100],
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.person),
-                    ),
-                    ] else...[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                      // ),
-                      child: Image.network(profileImage,height: 50,width: 50,fit:BoxFit.cover),
-                    ),
-                    ],
-                  ],
-                ),
-                Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 30),
-                      Text(
-                        'Available Points',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32,
-                        ),
-                      ),
-                      Text(
-                        points,
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32,
-                        ),
-                      ),
-                      //Redeem info
-                      const SizedBox(height: 20),
-                       Text('You can redeem your loyalty points from any Donat\em partner store.',
-                      style: GoogleFonts.poppins(
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade600,
-                          fontSize: 18,
-                        ),),
-                      const SizedBox(height: 80),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: InputButton1(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const QRScannerView(),
-                              ));
-                            },
-                            text: 'Scan QR to redeem'),
-                      ),
-                    ],
                   ),
-                )
-              ],
+                  Text(
+                    'Scanning QR code will simplify the acceptance way.',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade400,
+                      fontSize: 25,
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: InputButton1(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const QRScannerView(),
+                          ));
+                        },
+                        text: 'Scan QR'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -363,7 +262,7 @@ class _QRScannerViewState extends State<QRScannerView> {
         // Navigate to a new page with the scanned data
 
         {
-          Get.to(() => const RedeemLoyaltyAmount(), arguments: [
+          Get.to(() => const ScanQROrgEventViewReceiveMatchedItem(), arguments: [
             scanData.code.toString(),
           ]);
         }

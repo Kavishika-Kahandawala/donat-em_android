@@ -49,14 +49,14 @@ class Card4 extends StatelessWidget {
                         children: [
                           // Heading
                           Text(
-                            truncateString(heading, 40),
+                            truncateString(heading, 35),
                             style: GoogleFonts.poppins(fontSize: 22),
                           ),
                           const SizedBox(height: 10),
 
                           // Sub Heading
                           Text(
-                            truncateString(subHeading, 40),
+                            truncateString(subHeading, 35),
                             style: GoogleFonts.poppins(fontSize: 12),
                           )
                         ],

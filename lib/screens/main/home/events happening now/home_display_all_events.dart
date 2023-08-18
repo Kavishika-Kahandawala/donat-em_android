@@ -68,7 +68,7 @@ class _PaginatedFirestoreList extends StatelessWidget {
           final Map<String, dynamic> json =
               documentSnapshots[index].data() as Map<String, dynamic>;
 
-          final String eventDesc = json['event_desc'];
+          final String eventDesc = json['event_location_name'];
           final String eventName = json['event_name'];
           // final String orgId = json['org_id'];
           // final String uid = json['uid'];

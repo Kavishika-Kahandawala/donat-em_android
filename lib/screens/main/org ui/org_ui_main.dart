@@ -17,6 +17,12 @@ class _OrgMainUIState extends State<OrgMainUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      		  appBar: AppBar(
+        // title: const Text('Home'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.deepPurple.shade300,
+        elevation:0.0,
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(

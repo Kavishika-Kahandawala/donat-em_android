@@ -82,7 +82,7 @@ class Card7 extends StatelessWidget {
                       // Sub Heading
                       Row(
                         children: [
-                          Text(truncateString(subHeading,40)),
+                          Text(truncateString(subHeading,35)),
                         ],
                       )
                     ],
