@@ -123,7 +123,7 @@ class _PhotoUploadUI1State extends State<PhotoUploadUI1> {
                 percent: progress,
                 progressColor: Colors.deepPurple.shade300,
                 backgroundColor: Colors.deepPurple.shade100,
-                animation: true,
+                // animation: true,
                 animationDuration: 1000,
                 lineHeight: 25.0,
                 center: Text('${(progress * 100).toStringAsFixed(2)} % '),

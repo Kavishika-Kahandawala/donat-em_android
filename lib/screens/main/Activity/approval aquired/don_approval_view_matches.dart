@@ -170,7 +170,7 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
             .collection('donate history')
             .where('item_owner', isEqualTo: uid)
             .where('assigned_status', isEqualTo: 1)
-            .where('status', isEqualTo: 'pending'),
+            .where('status', isEqualTo: 'handshake'),
         itemBuilderType: PaginateBuilderType.listView);
   }
 }

@@ -154,7 +154,7 @@ class _OTPPhoneState extends State<OTPPhone> {
                       controller: pinController,
                       focusNode: focusNode,
                       androidSmsAutofillMethod:
-                          AndroidSmsAutofillMethod.smsUserConsentApi,
+                          AndroidSmsAutofillMethod.none,
                       listenForMultipleSmsOnAndroid: true,
                       defaultPinTheme: defaultPinTheme,
                       separatorBuilder: (index) => const SizedBox(width: 8),

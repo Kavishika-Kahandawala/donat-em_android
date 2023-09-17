@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donatem/screens/main/Activity/approval%20aquired/don_approval_view_matches.dart';
 import 'package:donatem/screens/main/Activity/donate%20completed%20items/completed_donatables.dart';
 import 'package:donatem/screens/main/Activity/donate%20items%20approval/view_donatables_Approval.dart';
 import 'package:donatem/screens/main/Activity/donate%20items/view_donatables.dart';
 import 'package:donatem/screens/main/Activity/matching/don_view_matches.dart';
+import 'package:donatem/screens/qr/uni_qr.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -155,13 +157,19 @@ class _ActivityUIState extends State<ActivityUI> {
                       ListTile(
                         title: const Text('Receiver approval acquired items'),
                         onTap: () {
-                          Get.to(() => const DonMatchItemSelect());
+                          Get.to(() => const DonApprovalMatchItemSelect());
                         },
                       ),
                       ListTile(
                         title: const Text('Donated items'),
                         onTap: () {
                           Get.to(() => const CompletedViewDonatables());
+                        },
+                      ),
+                      ListTile(
+                        title: const Text('View my donor QR code'),
+                        onTap: () {
+                          Get.to(() => const UniQr(),arguments: [uid.toString()]);
                         },
                       ),
                     ],

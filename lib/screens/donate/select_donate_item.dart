@@ -48,6 +48,7 @@ class _PaginatedFirestoreList extends StatefulWidget {
 class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
   // firebase uid
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  String itemName='';
 
   String truncateString(String input, int maxLength) {
     if (input.length <= maxLength) {
@@ -63,6 +64,15 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
 
   Future assign(String itemRefId, String recId) async {
     try {
+      await FirebaseFirestore.instance
+        .collection('donation items')
+        .doc(itemRefId)
+        .get()
+        .then((querySnapshot) {
+      setState(() {
+        itemName = querySnapshot.get('product_name');
+      });
+    });
       await FirebaseFirestore.instance.collection('donation items').doc(itemRefId).set({
         'assigned_status': 1,
         'assigned_to': recId,
@@ -73,6 +83,7 @@ class _PaginatedFirestoreListState extends State<_PaginatedFirestoreList> {
         'assigned_status': 1,
         'assigned_to': recId,
         'item_owner':uid,
+        'item_title':itemName,
         'item':itemRefId,
         'date':DateTime.now().toString(),
         'status':'pending'

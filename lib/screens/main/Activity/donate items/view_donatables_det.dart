@@ -169,7 +169,7 @@ class _ViewDonatablesItemItemDetailsState
                   onTap: (){
                     Get.to(() => const UniQr(),arguments: [itemId.toString()]);
                   },
-                  text: 'SHow QR Code',
+                  text: 'Show QR Code',
                 ),
                 const SizedBox(height: 15),
                 InputButton1(

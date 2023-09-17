@@ -59,7 +59,7 @@ class _OtherState extends State<Other> {
                     onTap: () => initCat("Other"),
                       heading: 'Other',
                       imgUrl:
-                          'https://cdn.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg'),
+                          'https://firebasestorage.googleapis.com/v0/b/donat-em-a9d65.appspot.com/o/donation%20items%20cats%20images%2Fother%2Fother.jpg?alt=media&token=1c121e8b-98dc-465b-8cd7-5a7f7cd1941b'),
                 ],
               );
   }
